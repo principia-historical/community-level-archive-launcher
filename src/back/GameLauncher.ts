@@ -145,23 +145,7 @@ export namespace GameLauncher {
 									 `    launchCommand:   "${opts.game.launchCommand}",\n`+
 									 `    command:         "${command}" ]`
 				});
-				// Show popups for Unity games
-				// (This is written specifically for the "startUnity.bat" batch file)
-				if (opts.game.platform === 'Unity' && proc.stdout) {
-					let textBuffer = ''; // (Buffer of text, if its multi-line)
-					proc.stdout.on('data', function(text: string): void {
-						// Add text to buffer
-						textBuffer += text;
-						// Check for exact messages and show the appropriate popup
-						for (const response of unityOutputResponses) {
-							if (textBuffer.endsWith(response.text)) {
-								response.fn(proc, opts.openDialog);
-								textBuffer = '';
-								break;
-							}
-						}
-					});
-				}
+
 			} break;
 		}
 	}
@@ -315,64 +299,3 @@ function splitQuotes(str: string): string[] {
 	}
 	return splits;
 }
-
-type UnityOutputResponse = {
-	text: string;
-	fn: (proc: ChildProcess, openDialog: OpenDialogFunc) => void;
-}
-
-const unityOutputResponses: UnityOutputResponse[] = [
-	{
-		text: 'Failed to set registry keys!\r\n'+
-					'Retry? (Y/n): ',
-		fn(proc, openDialog) {
-			openDialog({
-				type: 'warning',
-				title: 'Start Unity - Registry Key Warning',
-				message: 'Failed to set registry keys!\n'+
-								 'Retry?',
-				buttons: ['Yes', 'No'],
-				defaultId: 0,
-				cancelId: 1,
-			}).then((response) => {
-				if (!proc.stdin) { throw new Error('Failed to signal to Unity starter. Can not access its "standard in".'); }
-				if (response === 0) { proc.stdin.write('Y'); }
-				else				{ proc.stdin.write('n'); }
-			});
-		}
-	}, {
-		text: 'Invalid parameters!\r\n'+
-					'Correct usage: startUnity [2.x|5.x] URL\r\n'+
-					'If you need to undo registry changes made by this script, run unityRestoreRegistry.bat. \r\n'+
-					'Press any key to continue . . . ',
-		fn(proc, openDialog) {
-			openDialog({
-				type: 'warning',
-				title: 'Start Unity - Invalid Parameters',
-				message: 'Invalid parameters!\n'+
-								 'Correct usage: startUnity [2.x|5.x] URL\n'+
-								 'If you need to undo registry changes made by this script, run unityRestoreRegistry.bat.',
-				buttons: ['Ok'],
-				defaultId: 0,
-				cancelId: 0,
-			});
-		}
-	}, {
-		text: 'You must close the Basilisk browser to continue.\r\n'+
-					'If you have already closed Basilisk, please wait a moment...\r\n',
-		fn(proc, openDialog) {
-			openDialog({
-				type: 'info',
-				title: 'Start Unity - Browser Already Open',
-				message: 'You must close the Basilisk browser to continue.\n'+
-								 'If you have already closed Basilisk, please wait a moment...',
-				buttons: ['Ok', 'Cancel'],
-				defaultId: 0,
-				cancelId: 1,
-			})
-			.then((response) => {
-				if (response === 1) { proc.kill(); }
-			});
-		}
-	}
-];
