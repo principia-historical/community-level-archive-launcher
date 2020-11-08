@@ -1,0 +1,32 @@
+# Node/NPM
+node_modules
+npm-debug.log.*
+package-lock.json
+
+# Visual Studio Code
+/.vscode
+
+# Build
+/build
+
+# Distribution
+/dist
+
+# Temp
+/temp
+
+# Launcher files (created during testing)
+/config.json
+/preferences.json
+/.installed
+/.version
+/secret.txt
+/launcher.log
+/flashpoint.sqlite
+/Data
+/Curations
+
+# Jest related files
+/.coveralls.yml
+/coverage
+/tests/result
