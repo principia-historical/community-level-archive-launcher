@@ -9,9 +9,3 @@ export type InitRendererData = {
 	host: string;
 	secret: string;
 }
-
-export const FlashInitChannel = 'renderer-flash-init';
-
-export type FlashInitData = {
-	entry: string;
-}

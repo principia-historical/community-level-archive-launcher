@@ -1,15 +1,10 @@
 import { Coerce } from '@shared/utils/Coerce';
-import { flash } from './Flash';
 import { main } from './Main';
 import { Init } from './types';
 
 const init = getArgs();
 
-if (init.args['flash']) {
-	flash(init);
-} else {
-	main(init);
-}
+main(init);
 
 function getArgs(): Init {
 	const init: Init = {
@@ -28,21 +23,13 @@ function getArgs(): Init {
 			switch (name) {
 				// String value
 				case 'connect-remote':
-				case 'plugin':
 					init.args[name] = value;
 					lastArgIndex = i;
 					break;
 				// Boolean value
 				case 'host-remote':
 				case 'back-only':
-				case 'flash':
 					init.args[name] = Coerce.strToBool(value);
-					lastArgIndex = i;
-					break;
-				// Numerical value
-				case 'width':
-				case 'height':
-					init.args[name] = Coerce.num(value);
 					lastArgIndex = i;
 					break;
 			}

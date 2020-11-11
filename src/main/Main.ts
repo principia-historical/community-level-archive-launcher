@@ -64,7 +64,7 @@ export function main(init: Init): void {
 		app.allowRendererProcessReuse = true; // Hides the "new default value" warning message (remove this line after upgrading to electron 9)
 
 		// Single process
-		// No more than one "main" instance should exist at any time. Mutliple "flash" instances are fine.
+		// No more than one "main" instance should exist at any time.
 		if (!app.requestSingleInstanceLock()) {
 			app.exit();
 			return;

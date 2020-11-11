@@ -35,43 +35,19 @@ export namespace GameLauncher {
 		if (opts.game.placeholder) { return; }
 
 		// Launch game
-		const appPath: string = getApplicationPath(opts.game.applicationPath, opts.execMappings, opts.native);
-		switch (appPath) {
-			case ':flash:': {
-				const env = getEnvironment(opts.fpPath);
-				if ('ELECTRON_RUN_AS_NODE' in env) {
-					delete env['ELECTRON_RUN_AS_NODE']; // If this flag is present, it will disable electron features from the process
-				}
-				const proc = execFile(
-					process.execPath, // path.join(__dirname, '../main/index.js'),
-					[path.join(__dirname, '../main/index.js'), 'flash=true', opts.game.launchCommand],
-					{ env, cwd: process.cwd() }
-				);
-				logProcessOutput(proc, opts.log);
-				opts.log({
-					source: logSource,
-					content: `Launch Game "${opts.game.title}" (PID: ${proc.pid}) [\n`+
-									`    applicationPath: "${appPath}",\n`+
-									`    launchCommand:   "${opts.game.launchCommand}" ]`
-				});
-			} break;
-			default: {
-				const gamePath: string = fixSlashes(path.join(opts.fpPath, getApplicationPath(opts.game.applicationPath, opts.execMappings, opts.native)));
-				const gameArgs: string = opts.game.launchCommand;
-				const useWine: boolean = process.platform != 'win32' && gamePath.endsWith('.exe');
-				const command: string = createCommand(gamePath, gameArgs, useWine);
-				const proc = exec(command, { env: getEnvironment(opts.fpPath) });
-				logProcessOutput(proc, opts.log);
-				opts.log({
-					source: logSource,
-					content: `Launch Game "${opts.game.title}" (PID: ${proc.pid}) [\n`+
-									 `    applicationPath: "${opts.game.applicationPath}",\n`+
-									 `    launchCommand:   "${opts.game.launchCommand}",\n`+
-									 `    command:         "${command}" ]`
-				});
-
-			} break;
-		}
+		const gamePath: string = fixSlashes(path.join(opts.fpPath, getApplicationPath(opts.game.applicationPath, opts.execMappings, opts.native)));
+		const gameArgs: string = opts.game.launchCommand;
+		const useWine: boolean = process.platform != 'win32' && gamePath.endsWith('.exe');
+		const command: string = createCommand(gamePath, gameArgs, useWine);
+		const proc = exec(command, { env: getEnvironment(opts.fpPath) });
+		logProcessOutput(proc, opts.log);
+		opts.log({
+			source: logSource,
+			content: `Launch Game "${opts.game.title}" (PID: ${proc.pid}) [\n`+
+								`    applicationPath: "${opts.game.applicationPath}",\n`+
+								`    launchCommand:   "${opts.game.launchCommand}",\n`+
+								`    command:         "${command}" ]`
+		});
 	}
 
 	/**
