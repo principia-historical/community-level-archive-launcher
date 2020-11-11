@@ -21,24 +21,4 @@
 		<OriginalDescription/>
 		<Language>en</Language>
 	</Game>
-	<AdditionalApplication>
-		<ApplicationPath>FPSoftware\Shockwave\PJ101\SPR.exe</ApplicationPath>
-		<AutoRunAfter>false</AutoRunAfter>
-		<AutoRunBefore>false</AutoRunBefore>
-		<CommandLine>http://lbgdev.biz/Games/GTBlaster_13.dcr</CommandLine>
-		<Developer/>
-		<GameID>Game_1</GameID>
-		<Id>App_1</Id>
-		<Name>Prototype 13</Name>
-		<PlayCount>0</PlayCount>
-		<Priority>0</Priority>
-		<Region/>
-		<SideA>false</SideA>
-		<SideB>false</SideB>
-		<Status>false</Status>
-		<UseDosBox>false</UseDosBox>
-		<UseEmulator>false</UseEmulator>
-		<Version/>
-		<WaitForExit>false</WaitForExit>
-	</AdditionalApplication>
 </LaunchBox>

@@ -1,12 +1,11 @@
 import { Game } from '@database/entity/Game';
 import { TagCategory } from '@database/entity/TagCategory';
 import { ParsedCurationMeta } from './parse';
-import { EditAddAppCuration, EditCurationMeta } from './types';
+import { EditCurationMeta } from './types';
 
 /**
- * Convert game and its additional applications into a raw object representation in the curation format.
+ * Convert game into a raw object representation in the curation format.
  * @param game Game to convert.
- * @param addApps Additional applications of the game.
  */
 export function convertGameToCurationMetaFile(game: Game, categories: TagCategory[]): CurationMetaFile {
 	const parsed: CurationMetaFile = {};
@@ -33,48 +32,16 @@ export function convertGameToCurationMetaFile(game: Game, categories: TagCategor
 	parsed['Launch Command']		= game.launchCommand;
 	parsed['Game Notes']			= game.notes;
 	parsed['Original Description']	= game.originalDescription;
-	// Add-apps meta
-	const parsedAddApps: CurationFormatAddApps = {};
-	for (let i = 0; i < game.addApps.length; i++) {
-		const addApp = game.addApps[i];
-		if (addApp.applicationPath === ':extras:') {
-			parsedAddApps['Extras'] = addApp.launchCommand;
-		} else if (addApp.applicationPath === ':message:') {
-			parsedAddApps['Message'] = addApp.launchCommand;
-		} else {
-			let heading = addApp.name;
-			// Check if the property name is already in use
-			if (parsedAddApps[heading] !== undefined) {
-				// Look for an available name (by appending a number after it)
-				let index = 2;
-				while (true) {
-					const testHeading = `${heading} (${index})`;
-					if (parsedAddApps[testHeading] === undefined) {
-						heading = testHeading;
-						break;
-					}
-					index += 1;
-				}
-			}
-			// Add add-app
-			parsedAddApps[heading] = {
-				'Heading': addApp.name,
-				'Application Path': addApp.applicationPath,
-				'Launch Command': addApp.launchCommand,
-			};
-		}
-	}
-	parsed['Additional Applications'] = parsedAddApps;
+
 	// Return
 	return parsed;
 }
 
 /**
- * Convert curation and its additional applications into a raw object representation in the curation meta format. (for saving)
+ * Convert curation into a raw object representation in the curation meta format. (for saving)
  * @param curation Curation to convert.
- * @param addApps Additional applications of the curation.
  */
-export function convertEditToCurationMetaFile(curation: EditCurationMeta, categories: TagCategory[], addApps?: EditAddAppCuration[]): CurationMetaFile {
+export function convertEditToCurationMetaFile(curation: EditCurationMeta, categories: TagCategory[]): CurationMetaFile {
 	const parsed: CurationMetaFile = {};
 	const tagCategories = curation.tags ? curation.tags.map(t => {
 		const cat = categories.find(c => c.id === t.categoryId);
@@ -102,50 +69,13 @@ export function convertEditToCurationMetaFile(curation: EditCurationMeta, catego
 	parsed['Game Notes']			= curation.notes;
 	parsed['Original Description']	= curation.originalDescription;
 	parsed['Curation Notes']		= curation.curationNotes;
-	// Add-apps meta
-	const parsedAddApps: CurationFormatAddApps = {};
-	if (addApps) {
-		for (let i = 0; i < addApps.length; i++) {
-			const addApp = addApps[i].meta;
-			if (addApp.applicationPath === ':extras:') {
-				parsedAddApps['Extras'] = addApp.launchCommand;
-			} else if (addApp.applicationPath === ':message:') {
-				parsedAddApps['Message'] = addApp.launchCommand;
-			} else {
-				let heading = addApp.heading;
-				if (heading) {
-					// Check if the property name is already in use
-					if (parsedAddApps[heading] !== undefined) {
-						// Look for an available name (by appending a number after it)
-						let index = 2;
-						while (true) {
-							const testHeading = `${heading} (${index})`;
-							if (parsedAddApps[testHeading] === undefined) {
-								heading = testHeading;
-								break;
-							}
-							index += 1;
-						}
-					}
-					// Add add-app
-					parsedAddApps[heading] = {
-						'Heading': addApp.heading,
-						'Application Path': addApp.applicationPath,
-						'Launch Command': addApp.launchCommand,
-					};
-				}
-			}
-		}
-	}
-	parsed['Additional Applications'] = parsedAddApps;
 	// Return
 	return parsed;
 }
 
 /**
- * Convert parsed meta and its additional applications into a raw object representation in the curation meta format. (for saving)
+ * Convert parsed meta into a raw object representation in the curation meta format. (for saving)
  * @param curation Parsed meta to convert.
- * @param addApps Additional applications of the curation.
  */
 export function convertParsedToCurationMeta(curation: ParsedCurationMeta, categories: TagCategory[]): CurationMetaFile {
 	const parsed: CurationMetaFile = {};
@@ -175,42 +105,6 @@ export function convertParsedToCurationMeta(curation: ParsedCurationMeta, catego
 	parsed['Game Notes']			= curation.game.notes;
 	parsed['Original Description']	= curation.game.originalDescription;
 	parsed['Curation Notes']		= curation.game.curationNotes;
-	// Add-apps meta
-	const parsedAddApps: CurationFormatAddApps = {};
-	if (curation.addApps) {
-		for (let i = 0; i < curation.addApps.length; i++) {
-			const addApp = curation.addApps[i];
-			if (addApp.applicationPath === ':extras:') {
-				parsedAddApps['Extras'] = addApp.launchCommand;
-			} else if (addApp.applicationPath === ':message:') {
-				parsedAddApps['Message'] = addApp.launchCommand;
-			} else {
-				let heading = addApp.heading;
-				if (heading) {
-					// Check if the property name is already in use
-					if (parsedAddApps[heading] !== undefined) {
-						// Look for an available name (by appending a number after it)
-						let index = 2;
-						while (true) {
-							const testHeading = `${heading} (${index})`;
-							if (parsedAddApps[testHeading] === undefined) {
-								heading = testHeading;
-								break;
-							}
-							index += 1;
-						}
-					}
-					// Add add-app
-					parsedAddApps[heading] = {
-						'Heading': addApp.heading,
-						'Application Path': addApp.applicationPath,
-						'Launch Command': addApp.launchCommand,
-					};
-				}
-			}
-		}
-	}
-	parsed['Additional Applications'] = parsedAddApps;
 	// Return
 	return parsed;
 }
@@ -236,19 +130,5 @@ type CurationMetaFile = {
 	'Alternate Titles'?: string;
 	'Library'?: string;
 	'Version'?: string;
-	'Additional Applications'?: CurationFormatAddApps;
 	'Curation Notes'?: string;
-};
-
-type CurationFormatAddApps = {
-	[key: string]: CurationFormatAddApp;
-} & {
-	'Extras'?: string;
-	'Message'?: string;
-};
-
-type CurationFormatAddApp = {
-	'Application Path'?: string;
-	'Heading'?: string;
-	'Launch Command'?: string;
 };

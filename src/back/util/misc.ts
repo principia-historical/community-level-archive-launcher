@@ -2,14 +2,13 @@ import { SERVICES_SOURCE } from '@back/constants';
 import { createTagsFromLegacy } from '@back/importGame';
 import { ManagedChildProcess } from '@back/ManagedChildProcess';
 import { BackState } from '@back/types';
-import { AdditionalApp } from '@database/entity/AdditionalApp';
 import { Game } from '@database/entity/Game';
 import { Playlist } from '@database/entity/Playlist';
 import { Tag } from '@database/entity/Tag';
 import { BackOut } from '@shared/back/types';
 import { IBackProcessInfo, INamedBackProcessInfo, IService, ProcessState } from '@shared/interfaces';
 import { autoCode, getDefaultLocalization, LangContainer, LangFile } from '@shared/lang';
-import { Legacy_IAdditionalApplicationInfo, Legacy_IGameInfo } from '@shared/legacy/interfaces';
+import { Legacy_IGameInfo } from '@shared/legacy/interfaces';
 import { ILogEntry, ILogPreEntry } from '@shared/Log/interface';
 import { deepCopy, recursiveReplace, stringifyArray } from '@shared/Util';
 import * as child_process from 'child_process';
@@ -195,20 +194,6 @@ export async function execProcess(state: BackState, proc: IBackProcessInfo, sync
 	}
 }
 
-export function createAddAppFromLegacy(addApps: Legacy_IAdditionalApplicationInfo[], game: Game): AdditionalApp[] {
-	return addApps.map(a => {
-		return {
-			id: a.id,
-			name: a.name,
-			applicationPath: a.applicationPath,
-			launchCommand: a.launchCommand,
-			autoRunBefore: a.autoRunBefore,
-			waitForExit: a.waitForExit,
-			parentGame: game
-		};
-	});
-}
-
 export async function createGameFromLegacy(game: Legacy_IGameInfo, tagCache: Record<string, Tag>): Promise<Game> {
 	return {
 		id: game.id,
@@ -236,8 +221,7 @@ export async function createGameFromLegacy(game: Legacy_IGameInfo, tagCache: Rec
 		language: game.language,
 		library: game.library,
 		orderTitle: game.orderTitle,
-		placeholder: false,
-		addApps: []
+		placeholder: false
 	};
 }
 

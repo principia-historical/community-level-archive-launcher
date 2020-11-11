@@ -7,8 +7,6 @@ export type EditCuration = {
 	key: string;
 	/** Meta data of the curation. */
 	meta: EditCurationMeta;
-	/** Keys of additional applications that belong to this game. */
-	addApps: EditAddAppCuration[];
 	/** Data of each file in the content folder (and sub-folders). */
 	content: IndexedContent[];
 	/** Screenshot. */
@@ -21,14 +19,6 @@ export type EditCuration = {
 	delete: boolean;
 	/** Whether a curation has been successfully deleted */
 	deleted: boolean;
-}
-
-/** Data of an additional application curation in the curation importer. */
-export type EditAddAppCuration = {
-	/** Unique key of the curation (UUIDv4). Generated when loaded. */
-	key: string;
-	/** Meta data of the curation. */
-	meta: EditAddAppCurationMeta;
 }
 
 /** Meta data of a curation. */
@@ -54,13 +44,6 @@ export type EditCurationMeta = Partial<{
 	version: string;
 	originalDescription: string;
 	language: string;
-}>
-
-/** Meta data of an additional application curation. */
-export type EditAddAppCurationMeta = Partial<{
-	heading: string;
-	applicationPath: string;
-	launchCommand: string;
 }>
 
 export type CurationIndex = {

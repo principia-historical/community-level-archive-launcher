@@ -2,7 +2,7 @@ import { Game } from '@database/entity/Game';
 import { PlaylistGame } from '@database/entity/PlaylistGame';
 import { Tag } from '@database/entity/Tag';
 import { TagCategory } from '@database/entity/TagCategory';
-import { BackIn, BackOut, DeleteImageData, ImageChangeData, LaunchAddAppData, SaveImageData, TagByIdData, TagByIdResponse, TagGetOrCreateData, TagGetOrCreateResponse, TagSuggestion, WrappedResponse } from '@shared/back/types';
+import { BackIn, BackOut, DeleteImageData, ImageChangeData, SaveImageData, TagByIdData, TagByIdResponse, TagGetOrCreateData, TagGetOrCreateResponse, TagSuggestion, WrappedResponse } from '@shared/back/types';
 import { LOGOS, SCREENSHOTS } from '@shared/constants';
 import { wrapSearchTerm } from '@shared/game/GameFilter';
 import { ModelUtils } from '@shared/game/util';
@@ -24,7 +24,6 @@ import { GameImageSplit } from './GameImageSplit';
 import { ImagePreview } from './ImagePreview';
 import { InputElement, InputField } from './InputField';
 import { OpenIcon } from './OpenIcon';
-import { RightBrowseSidebarAddApp } from './RightBrowseSidebarAddApp';
 import { TagInputField } from './TagInputField';
 
 type OwnProps = {
@@ -154,7 +153,6 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 		const game: Game | undefined = this.props.currentGame;
 		if (game) {
 			const { isEditing, isNewGame, currentPlaylistEntry, preferencesData, suggestions, tagCategories } = this.props;
-			const currentAddApps = game.addApps;
 			const isPlaceholder = game.placeholder;
 			const editDisabled = !preferencesData.enableEditing;
 			const editable = !editDisabled && isEditing;
@@ -481,29 +479,6 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 							</div>
 						</div>
 					) : undefined }
-					{/* -- Additional Applications -- */}
-					{ editable || (currentAddApps && currentAddApps.length > 0) ? (
-						<div className='browse-right-sidebar__section'>
-							<div className='browse-right-sidebar__row browse-right-sidebar__row--additional-applications-header'>
-								<p>{strings.additionalApplications}:</p>
-								{ editable ? (
-									<input
-										type='button'
-										value={strings.new}
-										className='simple-button'
-										onClick={this.onNewAddAppClick} />
-								) : undefined }
-							</div>
-							{ currentAddApps && currentAddApps.map((addApp) => (
-								<RightBrowseSidebarAddApp
-									key={addApp.id}
-									addApp={addApp}
-									editDisabled={!editable}
-									onLaunch={this.onAddAppLaunch}
-									onDelete={this.onAddAppDelete} />
-							)) }
-						</div>
-					) : undefined }
 					{/* -- Application Path & Launch Command -- */}
 					{ editable && !isPlaceholder ? (
 						<div className='browse-right-sidebar__section'>
@@ -603,7 +578,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 					'browse-right-sidebar__title-row__buttons__delete-game' +
 					((activationCounter > 0) ? ' browse-right-sidebar__title-row__buttons__delete-game--active simple-vertical-shake' : '')
 				}
-				title={extra.deleteGameAndAdditionalApps}
+				title={extra.deleteGame}
 				onClick={activate}
 				onMouseLeave={reset}>
 				<OpenIcon icon='trash' />
@@ -799,28 +774,6 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 
 	onDeleteGameClick = (): void => {
 		this.props.onDeleteSelectedGame();
-	}
-
-	onAddAppLaunch(addAppId: string): void {
-		window.Shared.back.send<any, LaunchAddAppData>(BackIn.LAUNCH_ADDAPP, { id: addAppId });
-	}
-
-	onAddAppDelete = (addAppId: string): void => {
-		if (this.props.currentGame) {
-			const newAddApps = deepCopy(this.props.currentGame.addApps);
-			if (!newAddApps) { throw new Error('editAddApps is missing.'); }
-			const index = newAddApps.findIndex(addApp => addApp.id === addAppId);
-			if (index === -1) { throw new Error('Cant remove additional application because it was not found.'); }
-			newAddApps.splice(index, 1);
-			this.props.onEditGame({ addApps: newAddApps });
-		}
-	}
-
-	onNewAddAppClick = (): void => {
-		if (!this.props.currentGame)    { throw new Error('Unable to add a new AddApp. "currentGame" is missing.'); }
-		const newAddApp = ModelUtils.createAddApp(this.props.currentGame);
-		newAddApp.id = uuid();
-		this.props.onEditGame({ addApps: [...this.props.currentGame.addApps, ...[newAddApp]] });
 	}
 
 	onScreenshotClick = (): void => {

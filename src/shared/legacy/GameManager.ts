@@ -92,12 +92,10 @@ export class Legacy_PlatformFileIterator {
 				data: {
 					LaunchBox: {
 						Game: [],
-						AdditionalApplication: [],
 					},
 				},
 				collection: {
 					games: [],
-					additionalApplications: [],
 				},
 			};
 			// Populate platform
@@ -134,12 +132,10 @@ export namespace Legacy_GameManager {
 									data: {
 										LaunchBox: {
 											Game: [],
-											AdditionalApplication: [],
 										},
 									},
 									collection: {
 										games: [],
-										additionalApplications: [],
 									},
 								});
 							}
@@ -201,8 +197,7 @@ export namespace LaunchBox {
 			data.LaunchBox = {};
 		}
 
-		data.LaunchBox.Game                  = convertEntitiesToArray(data.LaunchBox.Game);
-		data.LaunchBox.AdditionalApplication = convertEntitiesToArray(data.LaunchBox.AdditionalApplication);
+		data.LaunchBox.Game = convertEntitiesToArray(data.LaunchBox.Game);
 
 		return true;
 

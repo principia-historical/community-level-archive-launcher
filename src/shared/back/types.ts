@@ -9,7 +9,7 @@ import { ChangedMeta, MetaEditFlags } from '@shared/MetaEdit';
 import { GameOrderBy, GameOrderReverse } from '@shared/order/interfaces';
 import { MessageBoxOptions, OpenExternalOptions } from 'electron';
 import { IAppConfigData } from '../config/interfaces';
-import { EditAddAppCuration, EditAddAppCurationMeta, EditCuration, EditCurationMeta } from '../curate/types';
+import { EditCuration, EditCurationMeta } from '../curate/types';
 import { ExecMapping, GamePropSuggestions, IService, ProcessAction } from '../interfaces';
 import { LangContainer, LangFile } from '../lang';
 import { ILogEntry, ILogPreEntry } from '../Log/interface';
@@ -31,7 +31,6 @@ export enum BackIn {
 	DELETE_GAME,
 	DUPLICATE_GAME,
 	EXPORT_GAME,
-	LAUNCH_ADDAPP,
 	SAVE_IMAGE,
 	DELETE_IMAGE,
 	QUICK_SEARCH,
@@ -52,7 +51,6 @@ export enum BackIn {
 	SAVE_LEGACY_PLATFORM,
 	IMPORT_CURATION,
 	LAUNCH_CURATION,
-	LAUNCH_CURATION_ADDAPP,
 	QUIT,
 	/** Tag funcs */
 	GET_OR_CREATE_TAG,
@@ -282,10 +280,6 @@ export type RandomGamesData = {
 
 export type RandomGamesResponseData = ViewGame[];
 
-export type LaunchAddAppData = {
-	id: string;
-}
-
 export type BrowseViewAllData = {
 	libraries: string[];
 }
@@ -502,15 +496,7 @@ export type ImportCurationResponseData = {
 export type LaunchCurationData = {
 	key: string;
 	meta: EditCurationMeta;
-	addApps: EditAddAppCurationMeta[];
 	mad4fp: boolean;
-	symlinkCurationContent: boolean;
-}
-
-export type LaunchCurationAddAppData = {
-	curationKey: string;
-	curation: EditAddAppCuration;
-	platform?: string;
 	symlinkCurationContent: boolean;
 }
 

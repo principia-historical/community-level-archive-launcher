@@ -1,4 +1,3 @@
-import { AdditionalApp } from '@database/entity/AdditionalApp';
 import { Game } from '@database/entity/Game';
 import { Playlist } from '@database/entity/Playlist';
 import { PlaylistGame } from '@database/entity/PlaylistGame';
@@ -134,7 +133,7 @@ async function onProcessMessage(message: any, sendHandle: any): Promise<void> {
 		const options: ConnectionOptions = {
 			type: 'sqlite',
 			database: path.join(state.config.flashpointPath, 'Data', 'flashpoint.sqlite'),
-			entities: [Game, AdditionalApp, Playlist, PlaylistGame, Tag, TagAlias, TagCategory],
+			entities: [Game, Playlist, PlaylistGame, Tag, TagAlias, TagCategory],
 			migrations: [Initial1593172736527]
 		};
 		state.connection = await createConnection(options);

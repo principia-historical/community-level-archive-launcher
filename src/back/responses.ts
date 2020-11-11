@@ -3,7 +3,7 @@ import { Playlist } from '@database/entity/Playlist';
 import { Tag } from '@database/entity/Tag';
 import { TagAlias } from '@database/entity/TagAlias';
 import { TagCategory } from '@database/entity/TagCategory';
-import { AddLogData, AddPlaylistGameData, BackIn, BackInit, BackOut, BrowseChangeData, BrowseViewIndexData, BrowseViewIndexResponse, BrowseViewKeysetData, BrowseViewKeysetResponse, BrowseViewPageData, BrowseViewPageResponseData, DeleteGameData, DeleteImageData, DeletePlaylistData, DeletePlaylistGameData, DeletePlaylistGameResponse, DeletePlaylistResponse, DuplicateGameData, DuplicatePlaylistData, ExportGameData, ExportMetaEditData, ExportPlaylistData, GameMetadataSyncResponse, GetAllGamesResponseData, GetExecData, GetGameData, GetGameResponseData, GetGamesTotalResponseData, GetMainInitDataResponse, GetPlaylistData, GetPlaylistGameData, GetPlaylistGameResponse, GetPlaylistResponse, GetPlaylistsResponse, GetRendererInitDataResponse, GetSuggestionsResponseData, ImageChangeData, ImportCurationData, ImportCurationResponseData, ImportMetaEditResponseData, ImportPlaylistData, InitEventData, LanguageChangeData, LaunchAddAppData, LaunchCurationAddAppData, LaunchCurationData, LaunchGameData, LocaleUpdateData, MergeTagData, PlaylistsChangeData, RandomGamesData, RandomGamesResponseData, SaveGameData, SaveImageData, SaveLegacyPlatformData as SaveLegacyPlatformData, SavePlaylistData, SavePlaylistGameData, SavePlaylistGameResponse, SavePlaylistResponse, ServiceActionData, SetLocaleData, TagByIdData, TagByIdResponse, TagCategoryByIdData, TagCategoryByIdResponse, TagCategoryDeleteData, TagCategoryDeleteResponse, TagCategorySaveData, TagCategorySaveResponse, TagDeleteData, TagDeleteResponse, TagFindData, TagFindResponse, TagGetData, TagGetOrCreateData, TagGetResponse, TagPrimaryFixData, TagPrimaryFixResponse, TagSaveData, TagSaveResponse, TagSuggestionsData, TagSuggestionsResponse, UpdateConfigData, UploadLogResponse } from '@shared/back/types';
+import { AddLogData, AddPlaylistGameData, BackIn, BackInit, BackOut, BrowseChangeData, BrowseViewIndexData, BrowseViewIndexResponse, BrowseViewKeysetData, BrowseViewKeysetResponse, BrowseViewPageData, BrowseViewPageResponseData, DeleteGameData, DeleteImageData, DeletePlaylistData, DeletePlaylistGameData, DeletePlaylistGameResponse, DeletePlaylistResponse, DuplicateGameData, DuplicatePlaylistData, ExportGameData, ExportMetaEditData, ExportPlaylistData, GameMetadataSyncResponse, GetAllGamesResponseData, GetExecData, GetGameData, GetGameResponseData, GetGamesTotalResponseData, GetMainInitDataResponse, GetPlaylistData, GetPlaylistGameData, GetPlaylistGameResponse, GetPlaylistResponse, GetPlaylistsResponse, GetRendererInitDataResponse, GetSuggestionsResponseData, ImageChangeData, ImportCurationData, ImportCurationResponseData, ImportMetaEditResponseData, ImportPlaylistData, InitEventData, LanguageChangeData, LaunchCurationData, LaunchGameData, LocaleUpdateData, MergeTagData, PlaylistsChangeData, RandomGamesData, RandomGamesResponseData, SaveGameData, SaveImageData, SaveLegacyPlatformData as SaveLegacyPlatformData, SavePlaylistData, SavePlaylistGameData, SavePlaylistGameResponse, SavePlaylistResponse, ServiceActionData, SetLocaleData, TagByIdData, TagByIdResponse, TagCategoryByIdData, TagCategoryByIdResponse, TagCategoryDeleteData, TagCategoryDeleteResponse, TagCategorySaveData, TagCategorySaveResponse, TagDeleteData, TagDeleteResponse, TagFindData, TagFindResponse, TagGetData, TagGetOrCreateData, TagGetResponse, TagPrimaryFixData, TagPrimaryFixResponse, TagSaveData, TagSaveResponse, TagSuggestionsData, TagSuggestionsResponse, UpdateConfigData, UploadLogResponse } from '@shared/back/types';
 import { overwriteConfigData } from '@shared/config/util';
 import { LOGOS, SCREENSHOTS } from '@shared/constants';
 import { convertGameToCurationMetaFile } from '@shared/curate/metaToMeta';
@@ -28,12 +28,12 @@ import { CONFIG_FILENAME, PREFERENCES_FILENAME } from './constants';
 import { GameManager } from './game/GameManager';
 import { TagManager } from './game/TagManager';
 import { GameLauncher } from './GameLauncher';
-import { importCuration, launchAddAppCuration, launchCuration } from './importGame';
+import { importCuration, launchCuration } from './importGame';
 import { MetadataServerApi, SyncableGames } from './MetadataServerApi';
 import { importAllMetaEdits } from './MetaEdit';
 import { respond } from './SocketServer';
 import { BackState, BareTag, TagsFile } from './types';
-import { copyError, createAddAppFromLegacy, createContainer, createGameFromLegacy, createPlaylist, exit, log, newLogEntry, pathExists, procToService, runService, waitForServiceDeath } from './util/misc';
+import { copyError, createContainer, createGameFromLegacy, createPlaylist, exit, log, newLogEntry, pathExists, procToService, runService, waitForServiceDeath } from './util/misc';
 import { sanitizeFilename } from './util/sanitizeFilename';
 import { uuid } from './util/uuid';
 
@@ -183,32 +183,6 @@ export function registerRequestCallbacks(state: BackState): void {
 		});
 	});
 
-	state.socketServer.register<LaunchAddAppData>(BackIn.LAUNCH_ADDAPP, async (event, req) => {
-		const reqData: LaunchAddAppData = req.data;
-		const addApp = await GameManager.findAddApp(reqData.id);
-		if (addApp) {
-			const platform = addApp.parentGame ? addApp.parentGame : '';
-			GameLauncher.launchAdditionalApplication({
-				addApp,
-				fpPath: path.resolve(state.config.flashpointPath),
-				native: addApp.parentGame && state.config.nativePlatforms.some(p => p === platform) || false,
-				execMappings: state.execMappings,
-				lang: state.languageContainer,
-				isDev: state.isDev,
-				exePath: state.exePath,
-				log: log.bind(undefined, state),
-				openDialog: state.socketServer.openDialog(event.target),
-				openExternal: state.socketServer.openExternal(event.target),
-			});
-		}
-
-		respond(event.target, {
-			id: req.id,
-			type: BackOut.GENERIC_RESPONSE,
-			data: undefined
-		});
-	});
-
 	state.socketServer.register<LaunchGameData>(BackIn.LAUNCH_GAME, async (event, req) => {
 		const reqData: LaunchGameData = req.data;
 		const game = await GameManager.findGame(reqData.id);
@@ -261,7 +235,7 @@ export function registerRequestCallbacks(state: BackState): void {
 	});
 
 	state.socketServer.register<DeleteGameData>(BackIn.DELETE_GAME, async (event, req) => {
-		const game = await GameManager.removeGameAndAddApps(req.data.id);
+		const game = await GameManager.removeGame(req.data.id);
 
 		state.queries = {}; // Clear entire cache
 
@@ -282,13 +256,7 @@ export function registerRequestCallbacks(state: BackState): void {
 
 			// Copy and apply new IDs
 			const newGame = deepCopy(game);
-			const newAddApps = game.addApps.map(addApp => deepCopy(addApp));
 			newGame.id = uuid();
-			for (let j = 0; j < newAddApps.length; j++) {
-				newAddApps[j].id = uuid();
-				newAddApps[j].parentGame = newGame;
-			}
-			newGame.addApps = newAddApps;
 
 			// Add copies
 			result = await GameManager.updateGame(newGame);
@@ -934,9 +902,7 @@ export function registerRequestCallbacks(state: BackState): void {
 		const translatedGames = [];
 		const tagCache: Record<string, Tag> = {};
 		for (const game of platform.collection.games) {
-			const addApps = platform.collection.additionalApplications.filter(a => a.gameId === game.id);
 			const translatedGame = await createGameFromLegacy(game, tagCache);
-			translatedGame.addApps = createAddAppFromLegacy(addApps, translatedGame);
 			translatedGames.push(translatedGame);
 		}
 		await GameManager.updateGames(translatedGames);
@@ -1071,7 +1037,7 @@ export function registerRequestCallbacks(state: BackState): void {
 				}
 			}
 
-			await launchCuration(req.data.key, req.data.meta, req.data.addApps, req.data.symlinkCurationContent, skipLink, {
+			await launchCuration(req.data.key, req.data.meta, req.data.symlinkCurationContent, skipLink, {
 				fpPath: path.resolve(state.config.flashpointPath),
 				native: state.config.nativePlatforms.some(p => p === req.data.meta.platform),
 				execMappings: state.execMappings,
@@ -1086,35 +1052,6 @@ export function registerRequestCallbacks(state: BackState): void {
 			log(state, {
 				source: 'Launcher',
 				content: `Error launching curation\n${err}`,
-			});
-		}
-
-		respond(event.target, {
-			id: req.id,
-			type: BackOut.GENERIC_RESPONSE,
-			data: undefined,
-		});
-	});
-
-	state.socketServer.register<LaunchCurationAddAppData>(BackIn.LAUNCH_CURATION_ADDAPP, async (event, req) => {
-		const skipLink = (req.data.curationKey === state.lastLinkedCurationKey);
-		state.lastLinkedCurationKey = req.data.curationKey;
-		try {
-			await launchAddAppCuration(req.data.curationKey, req.data.curation, req.data.symlinkCurationContent, skipLink, {
-				fpPath: path.resolve(state.config.flashpointPath),
-				native: state.config.nativePlatforms.some(p => p === req.data.platform) || false,
-				execMappings: state.execMappings,
-				lang: state.languageContainer,
-				isDev: state.isDev,
-				exePath: state.exePath,
-				log: log.bind(undefined, state),
-				openDialog: state.socketServer.openDialog(event.target),
-				openExternal: state.socketServer.openExternal(event.target),
-			});
-		} catch (err) {
-			log(state, {
-				source: 'Launcher',
-				content: `Error launching curation addapp\n${err}`,
 			});
 		}
 

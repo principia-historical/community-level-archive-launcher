@@ -1,6 +1,5 @@
 import { chunkArray } from '@back/util/misc';
 import { validateSqlName, validateSqlOrder } from '@back/util/sql';
-import { AdditionalApp } from '@database/entity/AdditionalApp';
 import { Game } from '@database/entity/Game';
 import { Playlist } from '@database/entity/Playlist';
 import { PlaylistGame } from '@database/entity/PlaylistGame';
@@ -186,14 +185,6 @@ export namespace GameManager {
 		return rangesOut;
 	}
 
-	/** Find an add apps with the specified ID. */
-	export async function findAddApp(id?: string, filter?: FindOneOptions<AdditionalApp>): Promise<AdditionalApp | undefined> {
-		if (id || filter) {
-			const addAppRepository = getManager().getRepository(AdditionalApp);
-			return addAppRepository.findOne(id, filter);
-		}
-	}
-
 	export async function findPlatformAppPaths(platform: string): Promise<string[]> {
 		const gameRepository = getManager().getRepository(Game);
 		const values = await gameRepository.createQueryBuilder('game')
@@ -254,14 +245,10 @@ export namespace GameManager {
 		return gameRepository.save(game);
 	}
 
-	export async function removeGameAndAddApps(gameId: string): Promise<Game | undefined> {
+	export async function removeGame(gameId: string): Promise<Game | undefined> {
 		const gameRepository = getManager().getRepository(Game);
-		const addAppRepository = getManager().getRepository(AdditionalApp);
 		const game = await GameManager.findGame(gameId);
 		if (game) {
-			for (const addApp of game.addApps) {
-				await addAppRepository.remove(addApp);
-			}
 			await gameRepository.remove(game);
 		}
 		return game;

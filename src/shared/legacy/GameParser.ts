@@ -1,23 +1,15 @@
-import { Legacy_IAdditionalApplicationInfo, Legacy_IGameCollection, Legacy_IGameInfo, Legacy_IRawPlatformFile, Legacy_IRawGameInfo, Legacy_IRawAdditionalApplicationInfo } from './interfaces';
+import { Legacy_IGameCollection, Legacy_IGameInfo, Legacy_IRawPlatformFile, Legacy_IRawGameInfo } from './interfaces';
 
 export class Legacy_GameParser {
 	public static parse(data: Legacy_IRawPlatformFile, filename: string): Legacy_IGameCollection {
 		const collection: Legacy_IGameCollection = {
 			games: [],
-			additionalApplications: [],
 		};
 		let games = data.LaunchBox.Game;
 		if (games) {
 			if (!Array.isArray(games)) { games = [ games ]; }
 			for (let i = games.length - 1; i >= 0; i--) {
 				collection.games[i] = Legacy_GameParser.parseRawGame(games[i], filename);
-			}
-		}
-		let apps = data.LaunchBox.AdditionalApplication;
-		if (apps) {
-			if (!Array.isArray(apps)) { apps = [ apps ]; }
-			for (let i = apps.length - 1; i >= 0; i--) {
-				collection.additionalApplications[i] = Legacy_GameParser.parseRawAdditionalApplication(apps[i]);
 			}
 		}
 		return collection;
@@ -54,18 +46,6 @@ export class Legacy_GameParser {
 		};
 	}
 
-	private static parseRawAdditionalApplication(data: Legacy_IRawAdditionalApplicationInfo): Legacy_IAdditionalApplicationInfo {
-		return {
-			id: Legacy_unescapeHTML(data.Id),
-			gameId: Legacy_unescapeHTML(data.GameID),
-			applicationPath: Legacy_unescapeHTML(data.ApplicationPath),
-			autoRunBefore: !!data.AutoRunBefore,
-			launchCommand: Legacy_unescapeHTML(data.CommandLine),
-			name: Legacy_unescapeHTML(data.Name),
-			waitForExit: !!data.WaitForExit,
-		};
-	}
-
 	public static reverseParseGame(game: Legacy_IGameInfo): Legacy_IRawGameInfo {
 		return {
 			ID: escapeHTML(game.id),
@@ -91,28 +71,6 @@ export class Legacy_GameParser {
 			Language: escapeHTML(game.language),
 		};
 	}
-
-	public static reverseParseAdditionalApplication(addapp: Legacy_IAdditionalApplicationInfo): Legacy_IRawAdditionalApplicationInfo {
-		return {
-			Id: escapeHTML(addapp.id),
-			GameID: escapeHTML(addapp.gameId),
-			ApplicationPath: escapeHTML(addapp.applicationPath),
-			AutoRunBefore: !!addapp.autoRunBefore,
-			CommandLine: escapeHTML(addapp.launchCommand),
-			Name: escapeHTML(addapp.name),
-			WaitForExit: !!addapp.waitForExit,
-		};
-	}
-
-	public static readonly emptyRawAdditionalApplication: Legacy_IRawAdditionalApplicationInfo = {
-		Id: '',
-		GameID: '',
-		ApplicationPath: '',
-		AutoRunBefore: false,
-		CommandLine: '',
-		Name: '',
-		WaitForExit: false,
-	};
 
 	/**
 	 * Split a field value from a game into an array.

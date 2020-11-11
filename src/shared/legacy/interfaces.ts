@@ -1,7 +1,6 @@
 /** Represents a collection of games */
 export interface Legacy_IGameCollection {
 	games: Legacy_IGameInfo[];
-	additionalApplications: Legacy_IAdditionalApplicationInfo[];
 }
 
 /**
@@ -63,28 +62,6 @@ export interface Legacy_IGameInfo extends Legacy_IPureGameInfo {
 	placeholder: boolean;
 }
 
-/** Represents the meta data for a single additional application */
-export interface Legacy_IAdditionalApplicationInfo {
-	/** ID of the additional application (unique identifier) */
-	id: string;
-	/** ID of the game this additional application is for */
-	gameId: string;
-	/** Path to the application that runs the additional application */
-	applicationPath: string;
-	/**
-	 * If the additional application should run before the game.
-	 * (If true, this will always run when the game is launched)
-	 * (If false, this will only run when specifically launched)
-	 */
-	autoRunBefore: boolean;
-	/** Command line argument(s) passed to the application to launch the game */
-	launchCommand: string;
-	/** Name of the additional application */
-	name: string;
-	/** @TODO Write this comment */
-	waitForExit: boolean;
-}
-
 export type Legacy_PlatformInfo = {
 	name: string;
 	library: string;
@@ -105,7 +82,6 @@ export type Legacy_IRawPlatformFile = {
 
 export type Legacy_IRawPlatform = {
 	Game: Legacy_IRawGameInfo[];
-	AdditionalApplication: Legacy_IRawAdditionalApplicationInfo[];
 }
 
 /**
@@ -137,21 +113,4 @@ export type Legacy_IRawGameInfo = {
 	Version?: string;				// (String)
 	OriginalDescription?: string;	// (String)
 	Language?: string;				// (String)
-}
-
-/**
- * This interface represents an Additional Application as stored in Platform XMLs (<AdditionalApplication> Tag)
- * Comments represent their XML data types and IAdditionalApplicationInfo counterparts
- * (NOTE: The property names are not necessarily the same as the XML node names,
- *	so this might not be completely convertible by making the first character lower/upper case)
- * ( http://pluginapi.launchbox-app.com/html/b33d2055-e2be-3f42-12c6-adbc5668f454.htm )
- */
-export type Legacy_IRawAdditionalApplicationInfo = {
-	Id: string;					// (String)
-	GameID?: string;			// (String)
-	ApplicationPath?: string;	// (String)
-	AutoRunBefore?: boolean;	// (Boolean)
-	CommandLine?: string;		// (String) - Launch Command
-	Name?: string;				// (String)
-	WaitForExit?: boolean;		// (Boolean)
 }

@@ -1,5 +1,4 @@
 import { Column, CreateDateColumn, Entity, Index, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { AdditionalApp } from './AdditionalApp';
 import { Tag } from './Tag';
 
 @Index('IDX_lookup_title',			['library', 'title'])
@@ -115,13 +114,6 @@ export class Game {
 	@Column({collation: 'NOCASE'})
 	/** The title but reconstructed to be suitable for sorting and ordering (and not be shown visually) */
 	orderTitle: string;
-
-	@OneToMany(type => AdditionalApp, addApp => addApp.parentGame, {
-		cascade: true,
-		eager: true
-	})
-	/** All attached Additional Apps of a game */
-	addApps: AdditionalApp[];
 
 	/** If the game is a placeholder (and can therefore not be saved) */
 	placeholder: boolean;

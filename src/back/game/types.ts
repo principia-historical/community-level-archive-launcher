@@ -15,11 +15,6 @@ export type RemoveGameResult = {
 	 * (gameIndices[platform_index] = [ game_index, ... ])
 	 */
 	gameIndices: number[][];
-	/**
-	 * Indices of all remove add-apps.
-	 * (addAppIndices[platform_index] = { [addapp_id]: addapp_index })
-	 */
-	addAppIndices: Record<string, number>[];
 }
 
 export type SearchCache = {

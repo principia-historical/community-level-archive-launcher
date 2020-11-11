@@ -10,7 +10,7 @@ export type IAppPreferencesData = {
 	browsePageGameScale: number;
 	/** If "Extreme" games should be shown at the BrowsePage. */
 	browsePageShowExtreme: boolean;
-	/** If editing games, additional applications and playlists should be allowed. */
+	/** If editing games and playlists should be allowed. */
 	enableEditing: boolean;
 	/** Default language used for fallback */
 	fallbackLanguage: string;

@@ -1,11 +1,10 @@
-import { AdditionalApp } from '@database/entity/AdditionalApp';
 import { Game } from '@database/entity/Game';
 import { Tag } from '@database/entity/Tag';
 import { TagCategory } from '@database/entity/TagCategory';
 import { validateSemiUUID } from '@renderer/util/uuid';
 import { htdocsPath, LOGOS, SCREENSHOTS } from '@shared/constants';
 import { convertEditToCurationMetaFile } from '@shared/curate/metaToMeta';
-import { CurationIndexImage, EditAddAppCuration, EditAddAppCurationMeta, EditCuration, EditCurationMeta } from '@shared/curate/types';
+import { CurationIndexImage, EditCuration, EditCurationMeta } from '@shared/curate/types';
 import { getContentFolderByKey, getCurationFolder, indexContentFolder } from '@shared/curate/util';
 import { sizeToString } from '@shared/Util';
 import { execFile } from 'child_process';
@@ -15,7 +14,7 @@ import * as YAML from 'yaml';
 import { GameManager } from './game/GameManager';
 import { TagManager } from './game/TagManager';
 import { GameManagerState } from './game/types';
-import { GameLauncher, LaunchAddAppOpts, LaunchGameOpts } from './GameLauncher';
+import { GameLauncher, LaunchGameOpts } from './GameLauncher';
 import { LogFunc, OpenDialogFunc, OpenExternalFunc } from './types';
 import { getMklinkBatPath } from './util/elevate';
 import { uuid } from './util/uuid';
@@ -75,12 +74,8 @@ export async function importCuration(opts: ImportCurationOpts): Promise<void> {
 	const contentToMove = [
 		[getContentFolderByKey(curation.key, fpPath), path.join(fpPath, htdocsPath)]
 	];
-	const extrasAddApp = curation.addApps.find(a => a.meta.applicationPath === ':extras:');
-	if (extrasAddApp && extrasAddApp.meta.launchCommand && extrasAddApp.meta.launchCommand.length > 0) {
-		// Add extras folder if meta has an entry
-		contentToMove.push([path.join(getCurationFolder(curation, fpPath), 'Extras'), path.join(fpPath, 'Extras', extrasAddApp.meta.launchCommand)]);
-	}
-	// Create and add game and additional applications
+
+	// Create and add game
 	const gameId = validateSemiUUID(curation.key) ? curation.key : uuid();
 	const oldGame = await GameManager.findGame(gameId);
 	if (oldGame) {
@@ -95,7 +90,7 @@ export async function importCuration(opts: ImportCurationOpts): Promise<void> {
 			throw new Error('User Cancelled Import');
 		}
 	}
-	const game = await createGameFromCurationMeta(gameId, curation.meta, curation.addApps, date);
+	const game = await createGameFromCurationMeta(gameId, curation.meta, date);
 	// Make a copy if not deleting the curation afterwards
 	const moveFiles = !saveCuration;
 	// curationLog(log, 'Importing Curation Meta');
@@ -154,7 +149,7 @@ export async function importCuration(opts: ImportCurationOpts): Promise<void> {
 			if (saveCuration) {
 				// Save working meta
 				const metaPath = path.join(getCurationFolder(curation, fpPath), 'meta.yaml');
-				const meta = YAML.stringify(convertEditToCurationMetaFile(curation.meta, opts.tagCategories, curation.addApps));
+				const meta = YAML.stringify(convertEditToCurationMetaFile(curation.meta, opts.tagCategories));
 				await fs.writeFile(metaPath, meta);
 				// Date in form 'YYYY-MM-DD' for folder sorting
 				const date = new Date();
@@ -190,25 +185,12 @@ export async function importCuration(opts: ImportCurationOpts): Promise<void> {
  * Create and launch a game from curation metadata.
  * @param curation Curation to launch
  */
-export async function launchCuration(key: string, meta: EditCurationMeta, addAppMetas: EditAddAppCurationMeta[], symlinkCurationContent: boolean, skipLink: boolean, opts: Omit<LaunchGameOpts, 'game'|'addApps'>) {
+export async function launchCuration(key: string, meta: EditCurationMeta, symlinkCurationContent: boolean, skipLink: boolean, opts: Omit<LaunchGameOpts, 'game'>) {
 	if (!skipLink || !symlinkCurationContent) { await linkContentFolder(key, opts.fpPath, opts.isDev, opts.exePath, symlinkCurationContent); }
 	curationLog(opts.log, `Launching Curation ${meta.title}`);
 	GameLauncher.launchGame({
 		...opts,
-		game: await createGameFromCurationMeta(key, meta, [], new Date()),
-	});
-}
-
-/**
- * Create and launch an additional application from curation metadata.
- * @param curationKey Key of the parent curation index
- * @param appCuration Add App Curation to launch
- */
-export async function launchAddAppCuration(curationKey: string, appCuration: EditAddAppCuration, symlinkCurationContent: boolean, skipLink: boolean, opts: Omit<LaunchAddAppOpts, 'addApp'>) {
-	if (!skipLink || !symlinkCurationContent) { await linkContentFolder(curationKey, opts.fpPath, opts.isDev, opts.exePath, symlinkCurationContent); }
-	GameLauncher.launchAdditionalApplication({
-		...opts,
-		addApp: createAddAppFromCurationMeta(appCuration, createPlaceholderGame()),
+		game: await createGameFromCurationMeta(key, meta, new Date()),
 	});
 }
 
@@ -221,7 +203,7 @@ function logMessage(text: string, curation: EditCuration): void {
  * @param curation Curation to get data from.
  * @param gameId ID to use for Game
  */
-async function createGameFromCurationMeta(gameId: string, gameMeta: EditCurationMeta, addApps : EditAddAppCuration[], date: Date): Promise<Game> {
+async function createGameFromCurationMeta(gameId: string, gameMeta: EditCurationMeta, date: Date): Promise<Game> {
 	const game: Game = {
 		id:						gameId, // (Re-use the id of the curation)
 		title:					gameMeta.title				|| '',
@@ -247,23 +229,9 @@ async function createGameFromCurationMeta(gameId: string, gameMeta: EditCuration
 		extreme:				gameMeta.extreme || false,
 		library:				gameMeta.library || '',
 		orderTitle: '', // This will be set when saved
-		addApps: [],
 		placeholder: false
 	};
-	game.addApps = addApps.map(addApp => createAddAppFromCurationMeta(addApp, game));
 	return game;
-}
-
-function createAddAppFromCurationMeta(addAppMeta: EditAddAppCuration, game: Game): AdditionalApp {
-	return {
-		id: addAppMeta.key,
-		name: addAppMeta.meta.heading || '',
-		applicationPath: addAppMeta.meta.applicationPath || '',
-		launchCommand: addAppMeta.meta.launchCommand || '',
-		autoRunBefore: false,
-		waitForExit: false,
-		parentGame: game
-	};
 }
 
 async function importGameImage(image: CurationIndexImage, gameId: string, folder: typeof LOGOS | typeof SCREENSHOTS, fullImagePath: string, log: LogFunc | undefined): Promise<void> {
@@ -457,7 +425,6 @@ function createPlaceholderGame(): Game {
 		language: '',
 		library: '',
 		orderTitle: '',
-		addApps: [],
 		placeholder: true
 	};
 }

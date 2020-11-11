@@ -1,4 +1,3 @@
-import { AdditionalApp } from '@database/entity/AdditionalApp';
 import { Game } from '@database/entity/Game';
 import { ExecMapping, Omit } from '@shared/interfaces';
 import { LangContainer } from '@shared/lang';
@@ -7,11 +6,6 @@ import { ChildProcess, exec, execFile } from 'child_process';
 import { EventEmitter } from 'events';
 import * as path from 'path';
 import { LogFunc, OpenDialogFunc, OpenExternalFunc } from './types';
-
-export type LaunchAddAppOpts = LaunchBaseOpts & {
-	addApp: AdditionalApp;
-	native: boolean;
-}
 
 export type LaunchGameOpts = LaunchBaseOpts & {
 	game: Game;
@@ -32,57 +26,6 @@ type LaunchBaseOpts = {
 export namespace GameLauncher {
 	const logSource = 'Game Launcher';
 
-	export function launchAdditionalApplication(opts: LaunchAddAppOpts): Promise<void> {
-		// @FIXTHIS It is not possible to open dialog windows from the back process (all electron APIs are undefined).
-		switch (opts.addApp.applicationPath) {
-			case ':message:':
-				return new Promise((resolve, reject) => {
-					opts.openDialog({
-						type: 'info',
-						title: 'About This Game',
-						message: opts.addApp.launchCommand,
-						buttons: ['Ok'],
-					}).finally(() => resolve());
-				});
-			case ':extras:': {
-				const folderPath = fixSlashes(path.join(opts.fpPath, path.posix.join('Extras', opts.addApp.launchCommand)));
-				return opts.openExternal(folderPath, { activate: true })
-				.catch(error => {
-					if (error) {
-						opts.openDialog({
-							type: 'error',
-							title: 'Failed to Open Extras',
-							message: `${error.toString()}\n`+
-											 `Path: ${folderPath}`,
-							buttons: ['Ok'],
-						});
-					}
-				});
-			}
-			default: {
-				const appPath: string = fixSlashes(path.join(opts.fpPath, getApplicationPath(opts.addApp.applicationPath, opts.execMappings, opts.native)));
-				const appArgs: string = opts.addApp.launchCommand;
-				const useWine: boolean = process.platform != 'win32' && appPath.endsWith('.exe');
-				const proc = exec(
-					createCommand(appPath, appArgs, useWine),
-					{ env: getEnvironment(opts.fpPath) }
-				);
-				logProcessOutput(proc, opts.log);
-				opts.log({
-					source: logSource,
-					content: `Launch Add-App "${opts.addApp.name}" (PID: ${proc.pid}) [ path: "${opts.addApp.applicationPath}", arg: "${opts.addApp.launchCommand}" ]`,
-				});
-				return new Promise((resolve, reject) => {
-					if (proc.killed) { resolve(); }
-					else {
-						proc.once('exit', () => { resolve(); });
-						proc.once('error', error => { reject(error); });
-					}
-				});
-			}
-		}
-	}
-
 	/**
 	 * Launch a game
 	 * @param game Game to launch
@@ -90,26 +33,7 @@ export namespace GameLauncher {
 	export async function launchGame(opts: LaunchGameOpts): Promise<void> {
 		// Abort if placeholder (placeholders are not "actual" games)
 		if (opts.game.placeholder) { return; }
-		// Run all provided additional applications with "AutoRunBefore" enabled
-		if (opts.game.addApps) {
-			const addAppOpts: Omit<LaunchAddAppOpts, 'addApp'> = {
-				fpPath: opts.fpPath,
-				native: opts.native,
-				execMappings: opts.execMappings,
-				lang: opts.lang,
-				isDev: opts.isDev,
-				exePath: opts.exePath,
-				log: opts.log,
-				openDialog: opts.openDialog,
-				openExternal: opts.openExternal,
-			};
-			for (const addApp of opts.game.addApps) {
-				if (addApp.autoRunBefore) {
-					const promise = launchAdditionalApplication({ ...addAppOpts, addApp });
-					if (addApp.waitForExit) { await promise; }
-				}
-			}
-		}
+
 		// Launch game
 		const appPath: string = getApplicationPath(opts.game.applicationPath, opts.execMappings, opts.native);
 		switch (appPath) {
@@ -151,7 +75,7 @@ export namespace GameLauncher {
 	}
 
 	/**
-	 * The paths provided in the Game/AdditionalApplication XMLs are only accurate
+	 * The paths provided in the Game XMLs are only accurate
 	 * on Windows. So we replace them with other hard-coded paths here.
 	 */
 	function getApplicationPath(filePath: string, execMappings: ExecMapping[], native: boolean): string {
@@ -183,7 +107,7 @@ export namespace GameLauncher {
 		return filePath;
 	}
 
-	/** Get an object containing the environment variables to use for the game / additional application. */
+	/** Get an object containing the environment variables to use for the game */
 	function getEnvironment(fpPath: string): NodeJS.ProcessEnv {
 		// When using Linux, use the proxy created in BackgroundServices.ts
 		// This is only needed on Linux because the proxy is installed on system

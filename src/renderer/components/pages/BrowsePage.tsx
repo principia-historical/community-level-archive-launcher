@@ -669,7 +669,6 @@ export class BrowsePage extends React.Component<BrowsePageProps, BrowsePageState
 					language: '',
 					library: this.props.gameLibrary,
 					orderTitle: '',
-					addApps: [],
 					placeholder: false,
 				},
 				isEditingGame: true,

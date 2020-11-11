@@ -19,22 +19,20 @@ describe('GameManager', () => {
 		// @TODO Compare that parsed content to a "snapshot" to verify that it was parsed correctly
 	});
 
-	test('Add Games & AddApps (to the same and already existing platform)', () => {
+	test('Add Games (to the same and already existing platform)', () => {
 		// Setup
 		const state = createState();
 		const platform = createPlatform('test_platform', 'test_library', state.platformsPath);
 		state.platforms.push(platform);
 		for (let i = 0; i < 10; i++) {
 			const before = deepCopy(platform);
-			// Add Game & AddApps
+			// Add Game
 			const game = createGame(before.name, before.library);
-			const addApps = createAddApps(game.id, i % 3); // Try different numbers of add-apps
 			GameManager.updateMeta(state, {
-				game: game,
-				addApps: addApps,
+				game: game
 			});
 			// Compare
-			expect(platform).toEqual({ // Game & AddApps have been added to the end of the collections in the correct order
+			expect(platform).toEqual({ // Game have been added to the end of the collections in the correct order
 				...before,
 				data: {
 					LaunchBox: {
@@ -42,30 +40,23 @@ describe('GameManager', () => {
 							...before.data.LaunchBox.Game,
 							GameParser.reverseParseGame(game),
 						],
-						AdditionalApplication: [
-							...before.data.LaunchBox.AdditionalApplication,
-							...addApps.map(GameParser.reverseParseAdditionalApplication),
-						],
 					},
 				},
 				collection: {
 					games: [ ...before.collection.games, game, ],
-					additionalApplications: [ ...before.collection.additionalApplications, ...addApps ],
 				},
 			});
 		}
 	});
 
-	test('Add Games & AddApps (to differnt and non-existing platforms)', () => {
+	test('Add Games (to differnt and non-existing platforms)', () => {
 		// Setup
 		const state = createState();
 		for (let i = 0; i < 10; i++) {
 			// Add Game
 			const game = createGame(`platform_${i}`, 'some_library');
-			const addApps = createAddApps(game.id, i % 3); // Try different numbers of add-apps
 			GameManager.updateMeta(state, {
-				game: game,
-				addApps: addApps,
+				game: game
 			});
 			// Compare
 			const platform = state.platforms.find(p => (p.name === game.platform) && (p.library === game.library));
@@ -76,18 +67,16 @@ describe('GameManager', () => {
 				data: {
 					LaunchBox: {
 						Game: [ GameParser.reverseParseGame(game) ],
-						AdditionalApplication: addApps.map(GameParser.reverseParseAdditionalApplication),
 					},
 				},
 				collection: {
 					games: [ game ],
-					additionalApplications: addApps,
 				},
 			});
 		}
 	});
 
-	test('Move Game & AddApps (between existing platforms)', () => {
+	test('Move Game (between existing platforms)', () => {
 		// Setup
 		const state = createState();
 		const fromPlatform = createPlatform('from_platform', 'some_library', state.platformsPath);
@@ -95,10 +84,8 @@ describe('GameManager', () => {
 		state.platforms.push(fromPlatform, toPlatform);
 		// Add Game
 		const game = createGame(fromPlatform.name, fromPlatform.library);
-		const addApps = createAddApps(game.id, 5);
 		GameManager.updateMeta(state, {
-			game: game,
-			addApps: addApps,
+			game: game
 		});
 		// Move Game
 		const sameGame: IGameInfo = {
@@ -107,8 +94,7 @@ describe('GameManager', () => {
 			library: toPlatform.library,
 		};
 		GameManager.updateMeta(state, {
-			game: sameGame,
-			addApps: addApps,
+			game: sameGame
 		});
 		// Compare
 		expect(fromPlatform).toEqual({ // First platform is empty
@@ -116,12 +102,10 @@ describe('GameManager', () => {
 			data: {
 				LaunchBox: {
 					Game: [],
-					AdditionalApplication: [],
 				},
 			},
 			collection: {
 				games: [],
-				additionalApplications: [],
 			},
 		});
 		expect(toPlatform).toEqual({ // Second platform has the game and add-apps
@@ -129,12 +113,10 @@ describe('GameManager', () => {
 			data: {
 				LaunchBox: {
 					Game: [ GameParser.reverseParseGame(sameGame) ],
-					AdditionalApplication: addApps.map(GameParser.reverseParseAdditionalApplication),
 				},
 			},
 			collection: {
 				games: [ sameGame ],
-				additionalApplications: addApps,
 			},
 		});
 	});
@@ -147,8 +129,7 @@ describe('GameManager', () => {
 		// Add Game
 		const game = createGame(platform.name, platform.library);
 		GameManager.updateMeta(state, {
-			game: game,
-			addApps: [],
+			game: game
 		});
 		// Update Game
 		const before = deepCopy(platform);
@@ -157,8 +138,7 @@ describe('GameManager', () => {
 			title: 'New Title',
 		};
 		GameManager.updateMeta(state, {
-			game: updatedGame,
-			addApps: [],
+			game: updatedGame
 		});
 		// Compare
 		expect(platform).not.toEqual(before); // Platform has been changed
@@ -167,55 +147,49 @@ describe('GameManager', () => {
 			data: {
 				LaunchBox: {
 					Game: [ GameParser.reverseParseGame(updatedGame) ],
-					AdditionalApplication: [],
 				},
 			},
 			collection: {
 				games: [ updatedGame ],
-				additionalApplications: [],
 			},
 		});
 	});
 
-	test('Remove Games & AddApps (from one platform)', () => {
+	test('Remove Games (from one platform)', () => {
 		// Setup
 		const state = createState();
 		const platform = createPlatform('test_platform', 'test_library', state.platformsPath);
 		state.platforms.push(platform);
-		// Add Games & AddApps
+		// Add Games
 		for (let i = 0; i < 10; i++) {
 			const game = createGame(platform.name, platform.library);
-			const addApp = createAddApp(game.id);
 			GameManager.updateMeta(state, {
-				game: game,
-				addApps: [ addApp ],
+				game: game
 			});
 		}
-		// Remove Games & AddApps
+		// Remove Games
 		for (let i = platform.collection.games.length - 1; i >= 0; i--) {
 			const before = deepCopy(platform);
 			const index = ((i + 7) ** 3) % platform.collection.games.length; // Pick a "random" index
 			const gameId = platform.collection.games[index].id;
-			// Remove Game & AddApps
-			GameManager.removeGameAndAddApps(state, gameId);
+			// Remove Game
+			GameManager.removeGame(state, gameId);
 			// Compare
-			expect(platform).toEqual({ // Game & AddApps have been removed
+			expect(platform).toEqual({ // Game have been removed
 				...before,
 				data: {
 					LaunchBox: {
 						Game: before.data.LaunchBox.Game.filter(g => g.ID !== gameId),
-						AdditionalApplication: before.data.LaunchBox.AdditionalApplication.filter(a => a.GameID !== gameId),
 					}
 				},
 				collection: {
 					games: before.collection.games.filter(g => g.id !== gameId),
-					additionalApplications: before.collection.additionalApplications.filter(a => a.gameId !== gameId),
 				},
 			});
 		}
 	});
 
-	test('Save Games & AddApps to file (multiple times)', () => {
+	test('Save Games to file (multiple times)', () => {
 		// Setup
 		const state = createState();
 		const platform = createPlatform('test_platform', 'test_library', state.platformsPath);
@@ -224,8 +198,7 @@ describe('GameManager', () => {
 		for (let i = 0; i < 10; i++) {
 			const game = createGame(platform.name, platform.library);
 			GameManager.updateMeta(state, {
-				game: game,
-				addApps: createAddApps(game.id, i % 3), // Try different numbers of add-apps
+				game: game
 			});
 		}
 		// Save file multiple times
@@ -273,12 +246,10 @@ function createPlatform(name: string, library: string, folderPath: string): Game
 		data: {
 			LaunchBox: {
 				Game: [],
-				AdditionalApplication: [],
 			},
 		},
 		collection: {
 			games: [],
-			additionalApplications: [],
 		},
 	};
 }
@@ -312,23 +283,4 @@ function createGame(platform: string, library: string): IGameInfo {
 		releaseDate: '',
 		version: '',
 	};
-}
-
-function createAddApp(gameId: string): IAdditionalApplicationInfo {
-	return {
-		id: uuid(),
-		name: '',
-		gameId: gameId,
-		applicationPath: '',
-		launchCommand: '',
-		autoRunBefore: false,
-		waitForExit: false,
-	};
-}
-function createAddApps(gameId: string, length: number): IAdditionalApplicationInfo[] {
-	const result: IAdditionalApplicationInfo[] = [];
-	for (let i = 0; i < length; i++) {
-		result.push(createAddApp(gameId));
-	}
-	return result;
 }

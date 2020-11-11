@@ -29,16 +29,14 @@ describe('convertMeta()',function () {
 
 const emptyMetaPath = './tests/static/curate/format/meta_empty.yaml';
 const emptyMeta: ParsedCurationMeta = {
-	game: {},
-	addApps: []
+	game: {}
 };
 
 const libraryCasePath = './tests/static/curate/format/meta_libraryCase.yaml';
 const libraryCase: ParsedCurationMeta = {
 	game: {
 		library: 'arcade'
-	},
-	addApps: []
+	}
 };
 
 const exampleMetaPath = './tests/static/curate/format/meta_example.yaml';
@@ -62,12 +60,5 @@ const exampleMeta: ParsedCurationMeta = {
 		launchCommand: 'http://example.com/index.html',
 		notes: 'Notes',
 		originalDescription: 'Original\nMultiline\nDesc'
-	},
-	addApps: [
-		{
-			heading: 'Example Add App',
-			applicationPath: 'FPSoftware\\Basilisk-Portable\\Basilisk-Portable.exe',
-			launchCommand: 'http://example.com/index.html?lang=en'
-		}
-	]
+	}
 };
