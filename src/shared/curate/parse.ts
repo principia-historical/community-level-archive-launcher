@@ -85,7 +85,6 @@ export async function parseCurationMetaFile(data: any, onError?: (error: string)
 	parser.prop('source',				v => parsed.game.source					= str(v));
 	parser.prop('status',				v => parsed.game.status					= str(v));
 	parser.prop('title',				v => parsed.game.title					= str(v));
-	parser.prop('alternate titles',		v => parsed.game.alternateTitles		= arrayStr(v));
 	parser.prop('version',				v => parsed.game.version				= str(v));
 	parser.prop('library',				v => parsed.game.library				= str(v).toLowerCase()); // must be lower case
 	if (lowerCaseData.genre)	{ parsed.game.tags = await getTagsFromStr(arrayStr(lowerCaseData.genre), str(lowerCaseData['tag categories']));	}

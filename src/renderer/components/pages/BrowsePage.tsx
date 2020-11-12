@@ -647,7 +647,6 @@ export class BrowsePage extends React.Component<BrowsePageProps, BrowsePageState
 					id: id,
 					parentGameId: id,
 					title: '',
-					alternateTitles: '',
 					series: '',
 					developer: '',
 					publisher: '',

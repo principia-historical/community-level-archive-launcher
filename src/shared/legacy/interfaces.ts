@@ -12,8 +12,6 @@ export interface Legacy_IPureGameInfo {
 	id: string;
 	/** Full title of the game */
 	title: string;
-	/** Any alternate titles to match against search */
-	alternateTitles: string;
 	/** Game series the game belongs to (empty string if none) */
 	series: string;
 	/** Name of the developer(s) of the game (developer names are separated by ',') */
@@ -94,7 +92,6 @@ export type Legacy_IRawPlatform = {
 export type Legacy_IRawGameInfo = {
 	ID: string;						// (String)
 	Title?: string;					// (String)
-	AlternateTitles?: string;		// (String)
 	Series?: string;				// (String)
 	Developer?: string;				// (String)
 	Publisher?: string;				// (String)

@@ -21,7 +21,6 @@ export class Legacy_GameParser {
 		return {
 			id: Legacy_unescapeHTML(data.ID),
 			title: title,
-			alternateTitles: Legacy_unescapeHTML(data.AlternateTitles),
 			series: Legacy_unescapeHTML(data.Series),
 			developer: Legacy_unescapeHTML(data.Developer),
 			publisher: Legacy_unescapeHTML(data.Publisher),
@@ -50,7 +49,6 @@ export class Legacy_GameParser {
 		return {
 			ID: escapeHTML(game.id),
 			Title: escapeHTML(game.title),
-			AlternateTitles: escapeHTML(game.alternateTitles),
 			Series: escapeHTML(game.series),
 			Developer: escapeHTML(game.developer),
 			Publisher: escapeHTML(game.publisher),

@@ -3,7 +3,6 @@ import { Tag } from '@database/entity/Tag';
 /** Game properties that can be partially exported/imported. */
 export type MetaEditMetaMap = Partial<{
 	title: string;
-	alternateTitles: string;
 	series: string;
 	developer: string;
 	publisher: string;

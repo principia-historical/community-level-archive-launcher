@@ -25,7 +25,6 @@ export type EditCuration = {
 export type EditCurationMeta = Partial<{
 	// Game fields
 	title: string;
-	alternateTitles: string;
 	series: string;
 	developer: string;
 	publisher: string;

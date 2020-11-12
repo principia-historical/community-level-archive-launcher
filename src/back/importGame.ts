@@ -207,7 +207,6 @@ async function createGameFromCurationMeta(gameId: string, gameMeta: EditCuration
 	const game: Game = {
 		id:						gameId, // (Re-use the id of the curation)
 		title:					gameMeta.title				|| '',
-		alternateTitles:		gameMeta.alternateTitles	|| '',
 		series:					gameMeta.series		    	|| '',
 		developer:				gameMeta.developer			|| '',
 		publisher:				gameMeta.publisher			|| '',
@@ -403,7 +402,6 @@ function createPlaceholderGame(): Game {
 		id: id,
 		parentGameId: id,
 		title: '',
-		alternateTitles: '',
 		series: '',
 		developer: '',
 		publisher: '',

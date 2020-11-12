@@ -76,7 +76,6 @@ export interface RightBrowseSidebar {
 export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps, RightBrowseSidebarState> {
 	// Bound "on change" callbacks for game fields
 	onTitleChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ title: text }));
-	onAlternateTitlesChange		= this.wrapOnTextChange((game, text) => this.props.onEditGame({ alternateTitles: text }));
 	onDeveloperChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ developer: text }));
 	onSeriesChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ series: text }));
 	onSourceChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ source: text }));
@@ -253,16 +252,6 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 					{ isPlaceholder ? undefined : (
 						<>
 							<div className='browse-right-sidebar__section'>
-								<div className='browse-right-sidebar__row browse-right-sidebar__row--one-line'>
-									<p>{strings.alternateTitles}: </p>
-									<InputField
-										text={game.alternateTitles}
-										placeholder={strings.noAlternateTitles}
-										className='browse-right-sidebar__searchable'
-										onChange={this.onAlternateTitlesChange}
-										editable={editable}
-										onKeyDown={this.onInputKeyDown} />
-								</div>
 								<div className='browse-right-sidebar__row browse-right-sidebar__row--one-line'>
 									<p>{strings.tags}: </p>
 									<TagInputField

@@ -85,7 +85,6 @@ export function MetaEditExporter(props: MetaEditExporterProps) {
 function initProperties(): MetaEditFlags {
 	return {
 		title: false,
-		alternateTitles: false,
 		series: false,
 		developer: false,
 		publisher: false,
@@ -113,7 +112,6 @@ function getGameString(key: keyof MetaEditFlags, strings: LangContainer): string
 	switch (key) {
 		default:					return key;
 		case 'title':				return strings.filter.title;
-		case 'alternateTitles':		return strings.browse.alternateTitles;
 		case 'series':				return strings.browse.series;
 		case 'developer':			return strings.filter.developer;
 		case 'publisher':			return strings.browse.publisher;

@@ -183,7 +183,6 @@ export function CurateBox(props: CurateBoxProps) {
 	// Callbacks for the fields (onChange)
 	const key							= props.curation ? props.curation.key : undefined;
 	const onTitleChange					= useOnInputChange('title',					key, props.dispatch);
-	const onAlternateTitlesChange		= useOnInputChange('alternateTitles',		key, props.dispatch);
 	const onSeriesChange				= useOnInputChange('series',				key, props.dispatch);
 	const onDeveloperChange				= useOnInputChange('developer',				key, props.dispatch);
 	const onPublisherChange				= useOnInputChange('publisher',				key, props.dispatch);
@@ -614,13 +613,6 @@ export function CurateBox(props: CurateBoxProps) {
 							text={props.curation && props.curation.meta.title || ''}
 							placeholder={strings.browse.noTitle}
 							onChange={onTitleChange}
-							{ ...sharedInputProps } />
-					</CurateBoxRow>
-					<CurateBoxRow title={strings.browse.alternateTitles + ':'}>
-						<InputField
-							text={props.curation && props.curation.meta.alternateTitles || ''}
-							placeholder={strings.browse.noAlternateTitles}
-							onChange={onAlternateTitlesChange}
 							{ ...sharedInputProps } />
 					</CurateBoxRow>
 					<CurateBoxRow title={strings.browse.library + ':'}>

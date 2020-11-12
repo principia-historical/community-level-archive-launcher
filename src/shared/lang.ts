@@ -196,8 +196,6 @@ const langTemplate = {
 		'noTitle',
 		'by',
 		'noDeveloper',
-		'alternateTitles',
-		'noAlternateTitles',
 		'tags',
 		'noTags',
 		'enterTag',

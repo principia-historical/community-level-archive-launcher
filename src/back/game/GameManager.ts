@@ -14,7 +14,7 @@ import { Brackets, FindOneOptions, getManager, SelectQueryBuilder } from 'typeor
 
 const exactFields = [ 'broken', 'extreme', 'library' ];
 enum flatGameFields {
-	'id', 'title', 'alternateTitles', 'developer', 'publisher', 'dateAdded', 'dateModified', 'series',
+	'id', 'title', 'developer', 'publisher', 'dateAdded', 'dateModified', 'series',
 	'platform', 'broken', 'extreme', 'playMode', 'status', 'notes', 'source', 'applicationPath', 'launchCommand', 'releaseDate',
 	'version', 'originalDescription', 'language', 'library'
 }
@@ -427,7 +427,6 @@ function doWhereTitle(alias: string, query: SelectQueryBuilder<Game>, value: str
 		const q = and ? qb : query;
 		const ref = `generic-${count}`;
 		q.where(  `${alias}.title ${comparator} :${ref}`,			{ [ref]: formedValue });
-		q.orWhere(`${alias}.alternateTitles ${comparator} :${ref}`,	{ [ref]: formedValue });
 		q.orWhere(`${alias}.developer ${comparator} :${ref}`,		{ [ref]: formedValue });
 		q.orWhere(`${alias}.publisher ${comparator} :${ref}`,		{ [ref]: formedValue });
 	});

@@ -58,7 +58,6 @@ async function parseGame(data: any, onError?: (error: string) => void): Promise<
 
 	parser.prop('id',					v => parsed.id					= str(v));
 	parser.prop('title',				v => parsed.title				= str(v));
-	parser.prop('alternate_titles',		v => parsed.alternateTitles		= str(v));
 	parser.prop('series',				v => parsed.series				= str(v));
 	parser.prop('developer',			v => parsed.developer			= str(v));
 	parser.prop('publisher',			v => parsed.id					= str(v));

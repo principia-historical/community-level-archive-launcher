@@ -261,7 +261,6 @@ function createGame(platform: string, library: string): IGameInfo {
 		orderTitle: '',
 		placeholder: false,
 		title: '',
-		alternateTitles: '',
 		id: id,
 		parentGameId: id,
 		series: '',

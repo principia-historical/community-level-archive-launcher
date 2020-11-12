@@ -27,10 +27,6 @@ export class Game {
 	title: string;
 
 	@Column({collation: 'NOCASE'})
-	/** Any alternate titles to match against search */
-	alternateTitles: string;
-
-	@Column({collation: 'NOCASE'})
 	/** Game series the game belongs to (empty string if none) */
 	series: string;
 

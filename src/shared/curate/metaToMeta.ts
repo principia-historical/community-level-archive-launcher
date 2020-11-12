@@ -49,7 +49,6 @@ export function convertEditToCurationMetaFile(curation: EditCurationMeta, catego
 	}) : [''];
 	// Edit curation meta
 	parsed['Title']					= curation.title;
-	parsed['Alternate Titles']		= curation.alternateTitles;
 	parsed['Library']				= curation.library;
 	parsed['Series']				= curation.series;
 	parsed['Developer']				= curation.developer;
@@ -85,7 +84,6 @@ export function convertParsedToCurationMeta(curation: ParsedCurationMeta, catego
 	}) : [''];
 	// Edit curation meta
 	parsed['Title']					= curation.game.title;
-	parsed['Alternate Titles']		= curation.game.alternateTitles;
 	parsed['Library']				= curation.game.library;
 	parsed['Series']				= curation.game.series;
 	parsed['Developer']				= curation.game.developer;
@@ -127,7 +125,6 @@ type CurationMetaFile = {
 	'Tags'?: string;
 	'Tag Categories'?: string;
 	'Title'?: string;
-	'Alternate Titles'?: string;
 	'Library'?: string;
 	'Version'?: string;
 	'Curation Notes'?: string;

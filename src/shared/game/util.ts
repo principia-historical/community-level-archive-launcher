@@ -5,7 +5,6 @@ export namespace ModelUtils {
 		return {
 			id: '',
 			title: '',
-			alternateTitles: '',
 			series: '',
 			developer: '',
 			publisher: '',
