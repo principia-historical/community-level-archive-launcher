@@ -79,7 +79,6 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 	onDeveloperChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ developer: text }));
 	onSeriesChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ series: text }));
 	onSourceChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ source: text }));
-	onPublisherChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ publisher: text }));
 	onPlatformChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ platform: text }));
 	onPlayModeChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ playMode: text }));
 	onStatusChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ status: text }));
@@ -102,7 +101,6 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 	onDeveloperClick			= this.wrapOnTextClick('developer');
 	onSeriesClick				= this.wrapOnTextClick('series');
 	onSourceClick				= this.wrapOnTextClick('source');
-	onPublisherClick			= this.wrapOnTextClick('publisher');
 	onPlatformClick				= this.wrapOnTextClick('platform');
 	onPlayModeClick				= this.wrapOnTextClick('playMode');
 	onStatusClick				= this.wrapOnTextClick('status');
@@ -278,17 +276,6 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 										onChange={this.onSeriesChange}
 										editable={editable}
 										onClick={this.onSeriesClick}
-										onKeyDown={this.onInputKeyDown} />
-								</div>
-								<div className='browse-right-sidebar__row browse-right-sidebar__row--one-line'>
-									<p>{strings.publisher}: </p>
-									<InputField
-										text={game.publisher}
-										placeholder={strings.noPublisher}
-										className='browse-right-sidebar__searchable'
-										onChange={this.onPublisherChange}
-										editable={editable}
-										onClick={this.onPublisherClick}
 										onKeyDown={this.onInputKeyDown} />
 								</div>
 								<div className='browse-right-sidebar__row browse-right-sidebar__row--one-line'>

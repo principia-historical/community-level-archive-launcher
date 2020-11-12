@@ -4,7 +4,6 @@
 		<Title>Test Game 1</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -26,7 +25,6 @@
 		<Title>Test Game 2</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -48,7 +46,6 @@
 		<Title>Test Game 3</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -70,7 +67,6 @@
 		<Title>Test Game 4</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -92,7 +88,6 @@
 		<Title>Test Game 5</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -114,7 +109,6 @@
 		<Title>Test Game 6</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -136,7 +130,6 @@
 		<Title>Test Game 7</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -158,7 +151,6 @@
 		<Title>Z Test 8</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -180,7 +172,6 @@
 		<Title>Z Game 9</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>
@@ -202,7 +193,6 @@
 		<Title>Z Game 10</Title>
 		<Series>Series</Series>
 		<Developer>Developer</Developer>
-		<Publisher>Publisher</Publisher>
 		<Platform>multiple_games</Platform>
 		<DateAdded>2019-10-30T20:42:18.930-00:00</DateAdded>
 		<Broken>false</Broken>

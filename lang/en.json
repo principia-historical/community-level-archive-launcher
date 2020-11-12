@@ -113,7 +113,6 @@
 		"series": "Series",
 		"title": "Title",
 		"developer": "Developer",
-		"publisher": "Publisher",
 		"ascending": "Ascending",
 		"descending": "Descending"
 	},
@@ -192,8 +191,6 @@
 		"enterTag": "Enter Tag",
 		"series": "Series",
 		"noSeries": "No Series",
-		"publisher": "Publisher",
-		"noPublisher": "No Publisher",
 		"source": "Source",
 		"noSource": "No Source",
 		"platform": "Platform",

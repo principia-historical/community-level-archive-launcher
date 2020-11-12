@@ -17,7 +17,6 @@ export function convertGameToCurationMetaFile(game: Game, categories: TagCategor
 	parsed['Title']					= game.title;
 	parsed['Series']				= game.series;
 	parsed['Developer']				= game.developer;
-	parsed['Publisher']				= game.publisher;
 	parsed['Play Mode']				= game.playMode;
 	parsed['Release Date']			= game.releaseDate;
 	parsed['Version']				= game.version;
@@ -52,7 +51,6 @@ export function convertEditToCurationMetaFile(curation: EditCurationMeta, catego
 	parsed['Library']				= curation.library;
 	parsed['Series']				= curation.series;
 	parsed['Developer']				= curation.developer;
-	parsed['Publisher']				= curation.publisher;
 	parsed['Play Mode']				= curation.playMode;
 	parsed['Release Date']			= curation.releaseDate;
 	parsed['Version']				= curation.version;
@@ -87,7 +85,6 @@ export function convertParsedToCurationMeta(curation: ParsedCurationMeta, catego
 	parsed['Library']				= curation.game.library;
 	parsed['Series']				= curation.game.series;
 	parsed['Developer']				= curation.game.developer;
-	parsed['Publisher']				= curation.game.publisher;
 	parsed['Play Mode']				= curation.game.playMode;
 	parsed['Release Date']			= curation.game.releaseDate;
 	parsed['Version']				= curation.game.version;
@@ -117,7 +114,6 @@ type CurationMetaFile = {
 	'Original Description'?: string;
 	'Play Mode'?: string;
 	'Platform'?: string;
-	'Publisher'?: string;
 	'Release Date'?: string;
 	'Series'?: string;
 	'Source'?: string;

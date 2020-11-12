@@ -5,7 +5,6 @@ import { Tag } from './Tag';
 @Index('IDX_lookup_dateAdded',		['library', 'dateAdded'])
 @Index('IDX_lookup_dateModified',	['library', 'dateModified'])
 @Index('IDX_lookup_developer',		['library', 'developer'])
-@Index('IDX_lookup_publisher',		['library', 'publisher'])
 @Index('IDX_lookup_series',			['library', 'series'])
 @Index('IDX_lookup_platform',		['library', 'platform'])
 @Index('IDX_total',					['library', 'broken', 'extreme'])
@@ -33,10 +32,6 @@ export class Game {
 	@Column({collation: 'NOCASE'})
 	/** Name of the developer(s) of the game (developer names are separated by ',') */
 	developer: string;
-
-	@Column({collation: 'NOCASE'})
-	/** Name of the publisher of the game */
-	publisher: string;
 
 	@Column({ type: 'datetime' })
 	/** Date-time of when the game was added to collection */
@@ -96,7 +91,7 @@ export class Game {
 	version: string;
 
 	@Column({collation: 'NOCASE'})
-	/** Original description of the game (probably given by the game's creator or publisher) */
+	/** Original description of the game */
 	originalDescription: string;
 
 	@Column({collation: 'NOCASE'})

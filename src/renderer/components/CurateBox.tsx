@@ -185,7 +185,6 @@ export function CurateBox(props: CurateBoxProps) {
 	const onTitleChange					= useOnInputChange('title',					key, props.dispatch);
 	const onSeriesChange				= useOnInputChange('series',				key, props.dispatch);
 	const onDeveloperChange				= useOnInputChange('developer',				key, props.dispatch);
-	const onPublisherChange				= useOnInputChange('publisher',				key, props.dispatch);
 	const onPlayModeChange				= useOnInputChange('playMode',				key, props.dispatch);
 	const onStatusChange				= useOnInputChange('status',				key, props.dispatch);
 	const onVersionChange				= useOnInputChange('version',				key, props.dispatch);
@@ -641,13 +640,6 @@ export function CurateBox(props: CurateBoxProps) {
 							text={props.curation && props.curation.meta.developer || ''}
 							placeholder={strings.browse.noDeveloper}
 							onChange={onDeveloperChange}
-							{ ...sharedInputProps } />
-					</CurateBoxRow>
-					<CurateBoxRow title={strings.browse.publisher + ':'}>
-						<InputField
-							text={props.curation && props.curation.meta.publisher || ''}
-							placeholder={strings.browse.noPublisher}
-							onChange={onPublisherChange}
 							{ ...sharedInputProps } />
 					</CurateBoxRow>
 					<CurateBoxRow title={strings.browse.tags + ':'}>

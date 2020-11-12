@@ -161,7 +161,6 @@ export class GameList extends React.Component<GameListProps> {
 				platform={game.platform}
 				tags={game.tags}
 				developer={game.developer}
-				publisher={game.publisher}
 				isDraggable={true}
 				isSelected={game.id === selectedGameId}
 				isDragged={game.id === draggedGameId} />

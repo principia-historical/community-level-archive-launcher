@@ -14,7 +14,7 @@ import { Brackets, FindOneOptions, getManager, SelectQueryBuilder } from 'typeor
 
 const exactFields = [ 'broken', 'extreme', 'library' ];
 enum flatGameFields {
-	'id', 'title', 'developer', 'publisher', 'dateAdded', 'dateModified', 'series',
+	'id', 'title', 'developer', 'dateAdded', 'dateModified', 'series',
 	'platform', 'broken', 'extreme', 'playMode', 'status', 'notes', 'source', 'applicationPath', 'launchCommand', 'releaseDate',
 	'version', 'originalDescription', 'language', 'library'
 }
@@ -78,7 +78,7 @@ export namespace GameManager {
 	export async function findRandomGames(count: number, extreme: boolean, broken: boolean, excludedLibraries: string[]): Promise<ViewGame[]> {
 		const gameRepository = getManager().getRepository(Game);
 		const query = gameRepository.createQueryBuilder('game');
-		query.select('game.id, game.title, game.platform, game.developer, game.publisher');
+		query.select('game.id, game.title, game.platform, game.developer');
 		if (!extreme) { query.andWhere('extreme = false'); }
 		if (!broken)  { query.andWhere('broken = false');  }
 		if (excludedLibraries.length > 0) {
@@ -168,7 +168,7 @@ export namespace GameManager {
 			// @TODO Make it infer the type of T from the value of "shallow", and then use that to make "games" get the correct type, somehow?
 			// @PERF When multiple pages are requested as individual ranges, select all of them with a single query then split them up
 			const games = (shallow)
-				? (await query.select('game.id, game.title, game.platform, game.developer, game.publisher').getRawMany()) as ViewGame[]
+				? (await query.select('game.id, game.title, game.platform, game.developer').getRawMany()) as ViewGame[]
 				: await query.getMany();
 			rangesOut.push({
 				start: range.start,
@@ -428,7 +428,6 @@ function doWhereTitle(alias: string, query: SelectQueryBuilder<Game>, value: str
 		const ref = `generic-${count}`;
 		q.where(  `${alias}.title ${comparator} :${ref}`,			{ [ref]: formedValue });
 		q.orWhere(`${alias}.developer ${comparator} :${ref}`,		{ [ref]: formedValue });
-		q.orWhere(`${alias}.publisher ${comparator} :${ref}`,		{ [ref]: formedValue });
 	});
 
 	if (and) {

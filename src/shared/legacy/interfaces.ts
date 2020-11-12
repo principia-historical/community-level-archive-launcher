@@ -16,8 +16,6 @@ export interface Legacy_IPureGameInfo {
 	series: string;
 	/** Name of the developer(s) of the game (developer names are separated by ',') */
 	developer: string;
-	/** Name of the publisher of the game */
-	publisher: string;
 	/** Date-time of when the game was added to collection */
 	dateAdded: string;
 	/** Platform the game runs on (Flash, HTML5, Shockwave etc.) */
@@ -44,7 +42,7 @@ export interface Legacy_IPureGameInfo {
 	releaseDate: string;
 	/** Version of the game */
 	version: string;
-	/** Original description of the game (probably given by the game's creator or publisher) */
+	/** Original description of the game */
 	originalDescription: string;
 	/** The language(s) the game is in */
 	language: string;
@@ -94,7 +92,6 @@ export type Legacy_IRawGameInfo = {
 	Title?: string;					// (String)
 	Series?: string;				// (String)
 	Developer?: string;				// (String)
-	Publisher?: string;				// (String)
 	DateAdded?: string;				// (DateTime)
 	Platform?: string;				// (String)
 	Broken?: boolean;				// (Boolean)

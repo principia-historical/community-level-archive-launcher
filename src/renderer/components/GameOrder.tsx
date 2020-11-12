@@ -44,7 +44,6 @@ export class GameOrder extends React.Component<GameOrderProps> {
 					<option value='series'>{strings.series}</option>
 					<option value='title'>{strings.title}</option>
 					<option value='developer'>{strings.developer}</option>
-					<option value='publisher'>{strings.publisher}</option>
 				</select>
 				{/* Order Reverse */}
 				<select

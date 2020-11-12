@@ -408,7 +408,6 @@ export type ViewGame = {
 	// List view only
 	tags: Tag[];
 	developer: string;
-	publisher: string;
 }
 
 export type BrowseChangeData = {

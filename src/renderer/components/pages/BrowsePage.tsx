@@ -649,7 +649,6 @@ export class BrowsePage extends React.Component<BrowsePageProps, BrowsePageState
 					title: '',
 					series: '',
 					developer: '',
-					publisher: '',
 					platform: '',
 					dateAdded: new Date().toISOString(),
 					dateModified: new Date().toISOString(),

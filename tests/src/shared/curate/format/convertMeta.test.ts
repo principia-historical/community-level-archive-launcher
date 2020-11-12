@@ -46,7 +46,6 @@ const exampleMeta: ParsedCurationMeta = {
 		library: 'theatre',
 		series: 'Series',
 		developer: 'Developer',
-		publisher: 'Publisher',
 		playMode: 'Single Player',
 		releaseDate: '2019-01-01',
 		version: '1.0.0',

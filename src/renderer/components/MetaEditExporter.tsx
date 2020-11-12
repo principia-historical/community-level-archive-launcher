@@ -87,7 +87,6 @@ function initProperties(): MetaEditFlags {
 		title: false,
 		series: false,
 		developer: false,
-		publisher: false,
 		tags: false,
 		platform: false,
 		broken: false,
@@ -114,7 +113,6 @@ function getGameString(key: keyof MetaEditFlags, strings: LangContainer): string
 		case 'title':				return strings.filter.title;
 		case 'series':				return strings.browse.series;
 		case 'developer':			return strings.filter.developer;
-		case 'publisher':			return strings.browse.publisher;
 		case 'tags':				return strings.browse.tags;
 		case 'platform':			return strings.browse.platform;
 		case 'broken':				return strings.browse.brokenInInfinity;
