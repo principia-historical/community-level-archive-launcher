@@ -135,7 +135,7 @@ export function registerRequestCallbacks(state: BackState): void {
 		const suggestions: GamePropSuggestions = {
 			tags: await GameManager.findUniqueValues(TagAlias, 'name'),
 			platform: await GameManager.findUniqueValues(Game, 'platform'),
-			playMode: await GameManager.findUniqueValues(Game, 'playMode'),
+			levelType: await GameManager.findUniqueValues(Game, 'levelType'),
 			status: await GameManager.findUniqueValues(Game, 'status'),
 			applicationPath: await GameManager.findUniqueValues(Game, 'applicationPath'),
 			library: await GameManager.findUniqueValues(Game, 'library'),

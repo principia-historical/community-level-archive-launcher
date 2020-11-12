@@ -91,7 +91,7 @@ function initProperties(): MetaEditFlags {
 		platform: false,
 		broken: false,
 		extreme: false,
-		playMode: false,
+		levelType: false,
 		status: false,
 		notes: false,
 		source: false,
@@ -117,7 +117,7 @@ function getGameString(key: keyof MetaEditFlags, strings: LangContainer): string
 		case 'platform':			return strings.browse.platform;
 		case 'broken':				return strings.browse.brokenInInfinity;
 		case 'extreme':				return strings.browse.extreme;
-		case 'playMode':			return strings.browse.playMode;
+		case 'levelType':			return strings.browse.levelType;
 		case 'status':				return strings.browse.status;
 		case 'notes':				return strings.browse.notes;
 		case 'source':				return strings.browse.source;

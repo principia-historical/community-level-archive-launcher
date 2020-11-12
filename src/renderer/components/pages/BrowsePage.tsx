@@ -654,7 +654,7 @@ export class BrowsePage extends React.Component<BrowsePageProps, BrowsePageState
 					dateModified: new Date().toISOString(),
 					broken: false,
 					extreme: false,
-					playMode: '',
+					levelType: '',
 					status: '',
 					notes: '',
 					tags: [],

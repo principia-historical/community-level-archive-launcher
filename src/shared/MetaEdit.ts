@@ -8,7 +8,7 @@ export type MetaEditMetaMap = Partial<{
 	platform: string;
 	broken: boolean;
 	extreme: boolean;
-	playMode: string;
+	levelType: string;
 	status: string;
 	notes: string;
 	tags: string[];

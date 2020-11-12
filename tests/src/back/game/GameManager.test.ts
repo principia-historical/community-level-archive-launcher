@@ -269,7 +269,7 @@ function createGame(platform: string, library: string): IGameInfo {
 		platform: platform,
 		broken: false,
 		extreme: false,
-		playMode: '',
+		levelType: '',
 		status: '',
 		notes: '',
 		tags: '',

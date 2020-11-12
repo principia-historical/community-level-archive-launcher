@@ -12,7 +12,7 @@ export namespace ModelUtils {
 			dateModified: new Date().toISOString(),
 			broken: false,
 			extreme: false,
-			playMode: '',
+			levelType: '',
 			status: '',
 			notes: '',
 			tags: [],

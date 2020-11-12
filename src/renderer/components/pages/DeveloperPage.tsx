@@ -435,7 +435,7 @@ function checkGameEmptyFields(games: Game[]): string {
 		checkField(game, empty, 'developer');
 		checkField(game, empty, 'source');
 		checkField(game, empty, 'platform');
-		checkField(game, empty, 'playMode');
+		checkField(game, empty, 'levelType');
 		checkField(game, empty, 'status');
 		checkField(game, empty, 'applicationPath');
 		checkField(game, empty, 'launchCommand');

@@ -54,8 +54,8 @@ export class Game {
 	extreme: boolean;
 
 	@Column({collation: 'NOCASE'})
-	/** If the game is single player or multiplayer, and if the multiplayer is cooperative or not */
-	playMode: string;
+	/** The type of the level (puzzle, adventure, custom) */
+	levelType: string;
 
 	@Column({collation: 'NOCASE'})
 	/** How playable the game is */

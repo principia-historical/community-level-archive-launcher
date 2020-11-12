@@ -37,7 +37,7 @@ export type EditCurationMeta = Partial<{
 	curationNotes: string;
 	platform: string;
 	applicationPath: string;
-	playMode: string;
+	levelType: string;
 	releaseDate: string;
 	version: string;
 	originalDescription: string;

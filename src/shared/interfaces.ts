@@ -217,7 +217,7 @@ export type ExecMapping = {
 export type SuggestionProps = (
 	| 'tags'
 	| 'platform'
-	| 'playMode'
+	| 'levelType'
 	| 'status'
 	| 'applicationPath'
 	| 'library'

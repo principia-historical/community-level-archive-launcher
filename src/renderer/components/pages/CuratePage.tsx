@@ -59,7 +59,7 @@ export function CuratePage(props: CuratePageProps) {
 			appPaths: props.appPaths,
 			language: 'en',
 			platform: 'Flash',
-			playMode: 'Single Player',
+			levelType: 'Custom',
 			status:   'Playable',
 			library:  ARCADE,
 		};
@@ -635,7 +635,7 @@ export function setGameMetaDefaults(meta: EditCurationMeta, defaults?: GameMetaD
 	if (defaults) {
 		// Set default meta values
 		if (!meta.language) { meta.language = defaults.language; }
-		if (!meta.playMode) { meta.playMode = defaults.playMode; }
+		if (!meta.levelType) { meta.levelType = defaults.levelType; }
 		if (!meta.status)   { meta.status   = defaults.status;   }
 		if (!meta.platform) { meta.platform = defaults.platform; }
 		if (!meta.library)  { meta.library  = defaults.library;  }

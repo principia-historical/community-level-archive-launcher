@@ -185,7 +185,7 @@ export function CurateBox(props: CurateBoxProps) {
 	const onTitleChange					= useOnInputChange('title',					key, props.dispatch);
 	const onSeriesChange				= useOnInputChange('series',				key, props.dispatch);
 	const onDeveloperChange				= useOnInputChange('developer',				key, props.dispatch);
-	const onPlayModeChange				= useOnInputChange('playMode',				key, props.dispatch);
+	const onLevelTypeChange				= useOnInputChange('levelType',				key, props.dispatch);
 	const onStatusChange				= useOnInputChange('status',				key, props.dispatch);
 	const onVersionChange				= useOnInputChange('version',				key, props.dispatch);
 	const onReleaseDateChange			= useOnInputChange('releaseDate',			key, props.dispatch);
@@ -200,7 +200,7 @@ export function CurateBox(props: CurateBoxProps) {
 	const onCurationNotesChange			= useOnInputChange('curationNotes',			key, props.dispatch);
 	const onExtremeChange				= useOnCheckboxToggle('extreme',			key, props.dispatch);
 	// Callbacks for the fields (onItemSelect)
-	const onPlayModeSelect				= useCallback(transformOnItemSelect(onPlayModeChange),			[onPlayModeChange]);
+	const onLevelTypeSelect				= useCallback(transformOnItemSelect(onLevelTypeChange),			[onLevelTypeChange]);
 	const onStatusSelect				= useCallback(transformOnItemSelect(onStatusChange),			[onStatusChange]);
 	const onPlatformItemSelect			= useCallback(transformOnItemSelect(onPlatformChange),			[onPlatformChange]);
 	const onApplicationPathItemSelect	= useCallback(transformOnItemSelect(onApplicationPathChange),	[onPlatformChange]);
@@ -655,13 +655,13 @@ export function CurateBox(props: CurateBoxProps) {
 							onTagSubmit={onAddTagByString}
 							onTagEditableSelect={onRemoveTag} />
 					</CurateBoxRow>
-					<CurateBoxRow title={strings.browse.playMode + ':'}>
+					<CurateBoxRow title={strings.browse.levelType + ':'}>
 						<DropdownInputField
-							text={props.curation && props.curation.meta.playMode || ''}
-							placeholder={strings.browse.noPlayMode}
-							onChange={onPlayModeChange}
-							items={props.suggestions && props.suggestions.playMode || []}
-							onItemSelect={onPlayModeSelect}
+							text={props.curation && props.curation.meta.levelType || ''}
+							placeholder={strings.browse.noLevelType}
+							onChange={onLevelTypeChange}
+							items={props.suggestions && props.suggestions.levelType || []}
+							onItemSelect={onLevelTypeSelect}
 							{ ...sharedInputProps } />
 					</CurateBoxRow>
 					<CurateBoxRow title={strings.browse.status + ':'}>

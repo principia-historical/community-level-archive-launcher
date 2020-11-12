@@ -16,7 +16,7 @@ export type GameMetaDefaults = {
 	appPaths: { [platform: string]: string; };
 	language: string;
 	platform: string;
-	playMode: string;
+	levelType: string;
 	status: string;
 	library: string;
 };
@@ -31,7 +31,7 @@ export function getDefaultMetaValues(appPaths: { [platform: string]: string; }):
 		appPaths: appPaths,
 		language: 'en',
 		platform: 'Flash',
-		playMode: 'Single Player',
+		levelType: 'Custom',
 		status:   'Playable',
 		library:  'Arcade'.toLowerCase() // must be lower case
 	};

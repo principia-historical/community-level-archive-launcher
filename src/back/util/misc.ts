@@ -206,7 +206,7 @@ export async function createGameFromLegacy(game: Legacy_IGameInfo, tagCache: Rec
 		dateModified: game.dateAdded,
 		broken: game.broken,
 		extreme: game.extreme,
-		playMode: game.playMode,
+		levelType: game.levelType,
 		status: game.status,
 		notes: game.notes,
 		tags: await createTagsFromLegacy(game.tags, tagCache),

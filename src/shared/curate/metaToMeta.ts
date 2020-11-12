@@ -17,7 +17,7 @@ export function convertGameToCurationMetaFile(game: Game, categories: TagCategor
 	parsed['Title']					= game.title;
 	parsed['Series']				= game.series;
 	parsed['Developer']				= game.developer;
-	parsed['Play Mode']				= game.playMode;
+	parsed['Level Type']				= game.levelType;
 	parsed['Release Date']			= game.releaseDate;
 	parsed['Version']				= game.version;
 	parsed['Languages']				= game.language;
@@ -51,7 +51,7 @@ export function convertEditToCurationMetaFile(curation: EditCurationMeta, catego
 	parsed['Library']				= curation.library;
 	parsed['Series']				= curation.series;
 	parsed['Developer']				= curation.developer;
-	parsed['Play Mode']				= curation.playMode;
+	parsed['Level Type']				= curation.levelType;
 	parsed['Release Date']			= curation.releaseDate;
 	parsed['Version']				= curation.version;
 	parsed['Languages']				= curation.language;
@@ -85,7 +85,7 @@ export function convertParsedToCurationMeta(curation: ParsedCurationMeta, catego
 	parsed['Library']				= curation.game.library;
 	parsed['Series']				= curation.game.series;
 	parsed['Developer']				= curation.game.developer;
-	parsed['Play Mode']				= curation.game.playMode;
+	parsed['Level Type']				= curation.game.levelType;
 	parsed['Release Date']			= curation.game.releaseDate;
 	parsed['Version']				= curation.game.version;
 	parsed['Languages']				= curation.game.language;
@@ -112,7 +112,7 @@ type CurationMetaFile = {
 	'Languages'?: string;
 	'Launch Command'?: string;
 	'Original Description'?: string;
-	'Play Mode'?: string;
+	'Level Type'?: string;
 	'Platform'?: string;
 	'Release Date'?: string;
 	'Series'?: string;

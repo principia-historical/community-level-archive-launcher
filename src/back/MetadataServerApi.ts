@@ -65,7 +65,7 @@ async function parseGame(data: any, onError?: (error: string) => void): Promise<
 	parser.prop('platform',				v => parsed.platform			= str(v));
 	parser.prop('extreme',				v => parsed.extreme				= !!v);
 	parser.prop('broken',				v => parsed.broken				= !!v);
-	parser.prop('play_mode',			v => parsed.playMode			= str(v));
+	parser.prop('level_type',			v => parsed.levelType			= str(v));
 	parser.prop('status',				v => parsed.status				= str(v));
 	parser.prop('notes',				v => parsed.notes				= str(v));
 	parser.prop('original_description',	v => parsed.originalDescription = str(v));

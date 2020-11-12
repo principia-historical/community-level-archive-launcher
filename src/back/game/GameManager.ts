@@ -15,7 +15,7 @@ import { Brackets, FindOneOptions, getManager, SelectQueryBuilder } from 'typeor
 const exactFields = [ 'broken', 'extreme', 'library' ];
 enum flatGameFields {
 	'id', 'title', 'developer', 'dateAdded', 'dateModified', 'series',
-	'platform', 'broken', 'extreme', 'playMode', 'status', 'notes', 'source', 'applicationPath', 'launchCommand', 'releaseDate',
+	'platform', 'broken', 'extreme', 'levelType', 'status', 'notes', 'source', 'applicationPath', 'launchCommand', 'releaseDate',
 	'version', 'originalDescription', 'language', 'library'
 }
 

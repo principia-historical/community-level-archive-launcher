@@ -24,8 +24,8 @@ export interface Legacy_IPureGameInfo {
 	broken: boolean;
 	/** Game is not suitable for children */
 	extreme: boolean;
-	/** If the game is single player or multiplayer, and if the multiplayer is cooperative or not */
-	playMode: string;
+	/** The type of the level (puzzle, adventure, custom) */
+	levelType: string;
 	/** How playable the game is */
 	status: string;
 	/** Information that could be useful for the player (of varying importance) */
@@ -96,7 +96,7 @@ export type Legacy_IRawGameInfo = {
 	Platform?: string;				// (String)
 	Broken?: boolean;				// (Boolean)
 	Hide?: boolean;					// (Boolean) - Extreme
-	PlayMode?: string;				// (String)
+	LevelType?: string;				// (String)
 	Status?: string;				// (String)
 	Notes?: string;					// (String)
 	Genre?: string;					// (String) - Tags / Genres

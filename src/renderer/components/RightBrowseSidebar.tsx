@@ -80,7 +80,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 	onSeriesChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ series: text }));
 	onSourceChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ source: text }));
 	onPlatformChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ platform: text }));
-	onPlayModeChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ playMode: text }));
+	onLevelTypeChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ levelType: text }));
 	onStatusChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ status: text }));
 	onVersionChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ version: text }));
 	onReleaseDateChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ releaseDate: text }));
@@ -102,7 +102,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 	onSeriesClick				= this.wrapOnTextClick('series');
 	onSourceClick				= this.wrapOnTextClick('source');
 	onPlatformClick				= this.wrapOnTextClick('platform');
-	onPlayModeClick				= this.wrapOnTextClick('playMode');
+	onLevelTypeClick				= this.wrapOnTextClick('levelType');
 	onStatusClick				= this.wrapOnTextClick('status');
 	onVersionClick				= this.wrapOnTextClick('version');
 	onReleaseDateClick			= this.wrapOnTextClick('releaseDate');
@@ -303,16 +303,16 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 										onKeyDown={this.onInputKeyDown} />
 								</div>
 								<div className='browse-right-sidebar__row browse-right-sidebar__row--one-line'>
-									<p>{strings.playMode}: </p>
+									<p>{strings.levelType}: </p>
 									<DropdownInputField
-										text={game.playMode}
-										placeholder={strings.noPlayMode}
-										onChange={this.onPlayModeChange}
+										text={game.levelType}
+										placeholder={strings.noLevelType}
+										onChange={this.onLevelTypeChange}
 										className='browse-right-sidebar__searchable'
 										editable={editable}
-										items={suggestions && filterSuggestions(suggestions.playMode) || []}
-										onItemSelect={text => this.props.onEditGame({ playMode: text })}
-										onClick={this.onPlayModeClick}
+										items={suggestions && filterSuggestions(suggestions.levelType) || []}
+										onItemSelect={text => this.props.onEditGame({ levelType: text })}
+										onClick={this.onLevelTypeClick}
 										onKeyDown={this.onInputKeyDown} />
 
 								</div>
