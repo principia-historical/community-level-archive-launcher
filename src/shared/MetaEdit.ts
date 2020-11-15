@@ -4,7 +4,7 @@ import { Tag } from '@database/entity/Tag';
 export type MetaEditMetaMap = Partial<{
 	title: string;
 	series: string;
-	developer: string;
+	author: string;
 	platform: string;
 	broken: boolean;
 	extreme: boolean;

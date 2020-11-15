@@ -45,7 +45,7 @@ const exampleMeta: ParsedCurationMeta = {
 		title: 'Test Curation',
 		library: 'theatre',
 		series: 'Series',
-		developer: 'Developer',
+		author: 'Author',
 		levelType: 'Custom',
 		releaseDate: '2019-01-01',
 		version: '1.0.0',

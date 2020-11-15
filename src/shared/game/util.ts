@@ -6,7 +6,7 @@ export namespace ModelUtils {
 			id: '',
 			title: '',
 			series: '',
-			developer: '',
+			author: '',
 			platform: '',
 			dateAdded: new Date().toISOString(),
 			dateModified: new Date().toISOString(),

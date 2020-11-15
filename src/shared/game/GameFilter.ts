@@ -20,7 +20,7 @@ export function parseSearchText(text: string): ParsedSearch {
 	/**
 	 * Stick it in regex101 so it's readable, it won't make sense otherwise
 	 * Special characters are left outside of matches (-!"sonic" matches "sonic")
-	 * Group 1 - Field name (source, developer...)
+	 * Group 1 - Field name (source, author...)
 	 * Group 2 - Field phrase
 	 * Group 3 - Field phrase (was wrapped in "")
 	 * Group 4 - Title phrase
@@ -84,7 +84,7 @@ export function parseSearchText(text: string): ParsedSearch {
 function parseQuickSearch(text: string): FieldFilter | undefined {
 	switch (text.charAt(0)) {
 		case '@':
-			return { field: 'developer', value: text.substring(1) };
+			return { field: 'author', value: text.substring(1) };
 		case '#':
 			return { field: 'tag', value: text.substring(1) };
 		case '!':

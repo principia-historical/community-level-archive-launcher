@@ -407,7 +407,7 @@ export type ViewGame = {
 	platform: string;
 	// List view only
 	tags: Tag[];
-	developer: string;
+	author: string;
 }
 
 export type BrowseChangeData = {

@@ -200,7 +200,7 @@ export async function createGameFromLegacy(game: Legacy_IGameInfo, tagCache: Rec
 		parentGameId: game.id,
 		title: game.title,
 		series: game.series,
-		developer: game.developer,
+		author: game.author,
 		platform: game.platform,
 		dateAdded: game.dateAdded,
 		dateModified: game.dateAdded,

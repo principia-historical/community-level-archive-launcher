@@ -8,7 +8,7 @@ export type GameListItemProps = ListRowProps & {
 	title: string;
 	platform: string;
 	tags: Tag[];
-	developer: string;
+	author: string;
 	/** If the row can be dragged (defaults to false). */
 	isDraggable?: boolean;
 	/** If the row is selected. */
@@ -18,7 +18,7 @@ export type GameListItemProps = ListRowProps & {
 };
 
 export function GameListItem(props: GameListItemProps) {
-	const { id, title, platform, tags, developer, isDraggable, isSelected, isDragged, index, style } = props;
+	const { id, title, platform, tags, author, isDraggable, isSelected, isDragged, index, style } = props;
 	// Get the platform icon path
 	const platformIcon = React.useMemo(() => (
 		getPlatformIconURL(platform)
@@ -60,9 +60,9 @@ export function GameListItem(props: GameListItemProps) {
 						</div>
 					))}
 					<div
-						className='game-list-item__field game-list-item__field--developer'
-						title={developer}>
-						{developer}
+						className='game-list-item__field game-list-item__field--author'
+						title={author}>
+						{author}
 					</div>
 				</div>
 			</li>

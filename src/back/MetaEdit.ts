@@ -39,7 +39,7 @@ function parseMetaEditMeta(parser: IObjectParserProp<any>) : MetaEditMeta {
 	parser.prop('id',					v => parsed.id					= str(v));
 	parser.prop('title',				v => parsed.title				= str(v), true);
 	parser.prop('series',				v => parsed.series				= str(v), true);
-	parser.prop('developer',			v => parsed.developer			= str(v), true);
+	parser.prop('author',				v => parsed.author			= str(v), true);
 	parser.prop('platform',				v => parsed.platform			= str(v), true);
 	parser.prop('broken',				v => parsed.broken				= strToBool(v + ''), true);
 	parser.prop('extreme',				v => parsed.extreme				= strToBool(v + ''), true);
@@ -363,7 +363,7 @@ function paranoidSetGameProperty(game: Game, property: unknown, value: unknown):
 		// String
 		case 'title':
 		case 'series':
-		case 'developer':
+		case 'author':
 		case 'platform':
 		case 'levelType':
 		case 'status':

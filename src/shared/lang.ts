@@ -119,7 +119,7 @@ const langTemplate = {
 		'platform',
 		'series',
 		'title',
-		'developer',
+		'author',
 		'ascending',
 		'descending',
 	] as const,
@@ -194,7 +194,7 @@ const langTemplate = {
 	browse: [
 		'noTitle',
 		'by',
-		'noDeveloper',
+		'noAuthor',
 		'tags',
 		'noTags',
 		'enterTag',

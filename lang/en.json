@@ -112,7 +112,7 @@
 		"platform": "Platform",
 		"series": "Series",
 		"title": "Title",
-		"developer": "Developer",
+		"author": "Author",
 		"ascending": "Ascending",
 		"descending": "Descending"
 	},
@@ -185,7 +185,7 @@
 	"browse": {
 		"noTitle": "No Title",
 		"by": "by",
-		"noDeveloper": "No Developer",
+		"noAuthor": "No Author",
 		"tags": "Tags",
 		"noTags": "No Tags",
 		"enterTag": "Enter Tag",

@@ -208,7 +208,7 @@ async function createGameFromCurationMeta(gameId: string, gameMeta: EditCuration
 		id:						gameId, // (Re-use the id of the curation)
 		title:					gameMeta.title				|| '',
 		series:					gameMeta.series		    	|| '',
-		developer:				gameMeta.developer			|| '',
+		author:					gameMeta.author				|| '',
 		platform:				gameMeta.platform			|| '',
 		levelType:				gameMeta.levelType			|| '',
 		status:					gameMeta.status				|| '',
@@ -402,7 +402,7 @@ function createPlaceholderGame(): Game {
 		parentGameId: id,
 		title: '',
 		series: '',
-		developer: '',
+		author: '',
 		platform: '',
 		dateAdded: new Date().toISOString(),
 		dateModified: new Date().toISOString(),

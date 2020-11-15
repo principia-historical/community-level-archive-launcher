@@ -76,7 +76,7 @@ export interface RightBrowseSidebar {
 export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps, RightBrowseSidebarState> {
 	// Bound "on change" callbacks for game fields
 	onTitleChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ title: text }));
-	onDeveloperChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ developer: text }));
+	onAuthorChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ author: text }));
 	onSeriesChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ series: text }));
 	onSourceChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ source: text }));
 	onPlatformChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ platform: text }));
@@ -98,7 +98,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 			this.props.onEditGame({ extreme: !this.props.currentGame.extreme });
 		}});
 	// Bound "on click" callbacks for game fields
-	onDeveloperClick			= this.wrapOnTextClick('developer');
+	onAuthorClick				= this.wrapOnTextClick('author');
 	onSeriesClick				= this.wrapOnTextClick('series');
 	onSourceClick				= this.wrapOnTextClick('source');
 	onPlatformClick				= this.wrapOnTextClick('platform');
@@ -168,7 +168,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 				<div
 					className={'browse-right-sidebar ' + (editable ? 'browse-right-sidebar--edit-enabled' : 'browse-right-sidebar--edit-disabled')}
 					onKeyDown={this.onLocalKeyDown}>
-					{/* -- Title & Developer(s) -- */}
+					{/* -- Title & Author -- */}
 					<div className='browse-right-sidebar__section'>
 						<div className='browse-right-sidebar__row'>
 							<div className='browse-right-sidebar__title-row'>
@@ -236,12 +236,12 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 							<div className='browse-right-sidebar__row browse-right-sidebar__row--one-line'>
 								<p>{strings.by} </p>
 								<InputField
-									text={game.developer}
-									placeholder={strings.noDeveloper}
+									text={game.author}
+									placeholder={strings.noAuthor}
 									className='browse-right-sidebar__searchable'
 									editable={editable}
-									onChange={this.onDeveloperChange}
-									onClick={this.onDeveloperClick}
+									onChange={this.onAuthorChange}
+									onClick={this.onAuthorClick}
 									onKeyDown={this.onInputKeyDown} />
 							</div>
 						) }

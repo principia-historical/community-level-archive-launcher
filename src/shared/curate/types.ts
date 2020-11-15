@@ -26,7 +26,7 @@ export type EditCurationMeta = Partial<{
 	// Game fields
 	title: string;
 	series: string;
-	developer: string;
+	author: string;
 	status: string;
 	extreme: boolean;
 	tags: Tag[];

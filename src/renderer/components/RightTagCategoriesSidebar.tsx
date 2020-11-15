@@ -60,7 +60,7 @@ export class RightTagCategoriesSidebar extends React.Component<RightTagCategorie
 				<div
 					className={'browse-right-sidebar ' + (editable ? 'browse-right-sidebar--edit-enabled' : 'browse-right-sidebar--edit-disabled')}
 					onKeyDown={this.onLocalKeyDown}>
-					{/* -- Title & Developer(s) -- */}
+					{/* -- Title & Author -- */}
 					<div className='browse-right-sidebar__section'>
 						<div className='browse-right-sidebar__row'>
 							<div className='browse-right-sidebar__title-row'>

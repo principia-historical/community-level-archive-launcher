@@ -160,7 +160,7 @@ export class GameList extends React.Component<GameListProps> {
 				title={game.title}
 				platform={game.platform}
 				tags={game.tags}
-				developer={game.developer}
+				author={game.author}
 				isDraggable={true}
 				isSelected={game.id === selectedGameId}
 				isDragged={game.id === draggedGameId} />

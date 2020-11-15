@@ -1554,8 +1554,8 @@ body {
 .game-list-item__field--tags {
 	max-width: 15%;
 } */
-.game-list-header-column--developer,
-.game-list-item__field--developer {
+.game-list-header-column--author,
+.game-list-item__field--author {
 	max-width: 30%;
 }
 .game-list-header-column--publisher,

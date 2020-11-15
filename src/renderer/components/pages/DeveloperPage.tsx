@@ -432,7 +432,7 @@ function checkGameEmptyFields(games: Game[]): string {
 	for (let i = 0; i < games.length - 1; i++) {
 		const game = games[i];
 		// Check if any game field (that should not be empty) is empty
-		checkField(game, empty, 'developer');
+		checkField(game, empty, 'author');
 		checkField(game, empty, 'source');
 		checkField(game, empty, 'platform');
 		checkField(game, empty, 'levelType');

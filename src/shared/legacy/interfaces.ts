@@ -14,8 +14,8 @@ export interface Legacy_IPureGameInfo {
 	title: string;
 	/** Game series the game belongs to (empty string if none) */
 	series: string;
-	/** Name of the developer(s) of the game (developer names are separated by ',') */
-	developer: string;
+	/** Name of the author of the level */
+	author: string;
 	/** Date-time of when the game was added to collection */
 	dateAdded: string;
 	/** Platform the game runs on (Flash, HTML5, Shockwave etc.) */
@@ -91,7 +91,7 @@ export type Legacy_IRawGameInfo = {
 	ID: string;						// (String)
 	Title?: string;					// (String)
 	Series?: string;				// (String)
-	Developer?: string;				// (String)
+	Author?: string;				// (String)
 	DateAdded?: string;				// (DateTime)
 	Platform?: string;				// (String)
 	Broken?: boolean;				// (Boolean)

@@ -264,7 +264,7 @@ function createGame(platform: string, library: string): IGameInfo {
 		id: id,
 		parentGameId: id,
 		series: '',
-		developer: '',
+		author: '',
 		dateAdded: '',
 		platform: platform,
 		broken: false,

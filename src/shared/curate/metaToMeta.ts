@@ -16,7 +16,7 @@ export function convertGameToCurationMetaFile(game: Game, categories: TagCategor
 	// Game meta
 	parsed['Title']					= game.title;
 	parsed['Series']				= game.series;
-	parsed['Developer']				= game.developer;
+	parsed['Author']				= game.author;
 	parsed['Level Type']				= game.levelType;
 	parsed['Release Date']			= game.releaseDate;
 	parsed['Version']				= game.version;
@@ -50,7 +50,7 @@ export function convertEditToCurationMetaFile(curation: EditCurationMeta, catego
 	parsed['Title']					= curation.title;
 	parsed['Library']				= curation.library;
 	parsed['Series']				= curation.series;
-	parsed['Developer']				= curation.developer;
+	parsed['Author']				= curation.author;
 	parsed['Level Type']				= curation.levelType;
 	parsed['Release Date']			= curation.releaseDate;
 	parsed['Version']				= curation.version;
@@ -84,7 +84,7 @@ export function convertParsedToCurationMeta(curation: ParsedCurationMeta, catego
 	parsed['Title']					= curation.game.title;
 	parsed['Library']				= curation.game.library;
 	parsed['Series']				= curation.game.series;
-	parsed['Developer']				= curation.game.developer;
+	parsed['Author']				= curation.game.author;
 	parsed['Level Type']				= curation.game.levelType;
 	parsed['Release Date']			= curation.game.releaseDate;
 	parsed['Version']				= curation.game.version;
@@ -106,7 +106,7 @@ export function convertParsedToCurationMeta(curation: ParsedCurationMeta, catego
 
 type CurationMetaFile = {
 	'Application Path'?: string;
-	'Developer'?: string;
+	'Author'?: string;
 	'Extreme'?: string;
 	'Game Notes'?: string;
 	'Languages'?: string;

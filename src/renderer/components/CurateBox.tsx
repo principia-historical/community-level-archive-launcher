@@ -184,7 +184,7 @@ export function CurateBox(props: CurateBoxProps) {
 	const key							= props.curation ? props.curation.key : undefined;
 	const onTitleChange					= useOnInputChange('title',					key, props.dispatch);
 	const onSeriesChange				= useOnInputChange('series',				key, props.dispatch);
-	const onDeveloperChange				= useOnInputChange('developer',				key, props.dispatch);
+	const onAuthorChange				= useOnInputChange('author',				key, props.dispatch);
 	const onLevelTypeChange				= useOnInputChange('levelType',				key, props.dispatch);
 	const onStatusChange				= useOnInputChange('status',				key, props.dispatch);
 	const onVersionChange				= useOnInputChange('version',				key, props.dispatch);
@@ -635,11 +635,11 @@ export function CurateBox(props: CurateBoxProps) {
 							onChange={onSeriesChange}
 							{ ...sharedInputProps } />
 					</CurateBoxRow>
-					<CurateBoxRow title={strings.filter.developer + ':'}>
+					<CurateBoxRow title={strings.filter.author + ':'}>
 						<InputField
-							text={props.curation && props.curation.meta.developer || ''}
-							placeholder={strings.browse.noDeveloper}
-							onChange={onDeveloperChange}
+							text={props.curation && props.curation.meta.author || ''}
+							placeholder={strings.browse.noAuthor}
+							onChange={onAuthorChange}
 							{ ...sharedInputProps } />
 					</CurateBoxRow>
 					<CurateBoxRow title={strings.browse.tags + ':'}>
