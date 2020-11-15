@@ -56,27 +56,27 @@ async function parseGame(data: any, onError?: (error: string) => void): Promise<
 		onError: onError && (e => { onError(`Error while parsing Game from Metadata Host Response: ${e.toString()}`); })
 	});
 
-	parser.prop('id',					v => parsed.id					= str(v));
-	parser.prop('title',				v => parsed.title				= str(v));
-	parser.prop('series',				v => parsed.series				= str(v));
-	parser.prop('author',				v => parsed.author				= str(v));
-	parser.prop('release_date',			v => parsed.releaseDate			= str(v));
-	parser.prop('library',				v => parsed.library				= str(v));
-	parser.prop('platform',				v => parsed.platform			= str(v));
-	parser.prop('extreme',				v => parsed.extreme				= !!v);
-	parser.prop('broken',				v => parsed.broken				= !!v);
-	parser.prop('level_type',			v => parsed.levelType			= str(v));
-	parser.prop('status',				v => parsed.status				= str(v));
-	parser.prop('notes',				v => parsed.notes				= str(v));
-	parser.prop('original_description',	v => parsed.originalDescription = str(v));
-	parser.prop('source',				v => parsed.source				= str(v));
-	parser.prop('application_path',		v => parsed.applicationPath		= str(v));
-	parser.prop('launch_command',		v => parsed.launchCommand		= str(v));
-	parser.prop('date_added',			v => parsed.dateAdded			= (new Date(num(v))).toISOString());
-	parser.prop('date_modified',		v => parsed.dateModified		= (new Date(num(v))).toISOString());
-	parser.prop('version',				v => parsed.version				= str(v));
-	parser.prop('languages',			v => parsed.language			= str(v));
-	parser.prop('parent_id',			v => parsed.parentGameId		= str(v));
+	parser.prop('id',				v => parsed.id				= str(v));
+	parser.prop('title',			v => parsed.title			= str(v));
+	parser.prop('series',			v => parsed.series			= str(v));
+	parser.prop('author',			v => parsed.author			= str(v));
+	parser.prop('release_date',		v => parsed.releaseDate		= str(v));
+	parser.prop('library',			v => parsed.library			= str(v));
+	parser.prop('platform',			v => parsed.platform		= str(v));
+	parser.prop('extreme',			v => parsed.extreme			= !!v);
+	parser.prop('broken',			v => parsed.broken			= !!v);
+	parser.prop('level_type',		v => parsed.levelType		= str(v));
+	parser.prop('status',			v => parsed.status			= str(v));
+	parser.prop('notes',			v => parsed.notes			= str(v));
+	parser.prop('description',		v => parsed.description		= str(v));
+	parser.prop('source',			v => parsed.source			= str(v));
+	parser.prop('application_path',	v => parsed.applicationPath	= str(v));
+	parser.prop('launch_command',	v => parsed.launchCommand	= str(v));
+	parser.prop('date_added',		v => parsed.dateAdded		= (new Date(num(v))).toISOString());
+	parser.prop('date_modified',	v => parsed.dateModified	= (new Date(num(v))).toISOString());
+	parser.prop('version',			v => parsed.version			= str(v));
+	parser.prop('languages',		v => parsed.language		= str(v));
+	parser.prop('parent_id',		v => parsed.parentGameId	= str(v));
 
 	// Temporary
 	if (data.tags) {

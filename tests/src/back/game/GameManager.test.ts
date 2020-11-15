@@ -274,7 +274,7 @@ function createGame(platform: string, library: string): IGameInfo {
 		notes: '',
 		tags: '',
 		source: '',
-		originalDescription: '',
+		description: '',
 		applicationPath: '',
 		language: '',
 		launchCommand: '',

@@ -36,7 +36,7 @@ export class Legacy_GameParser {
 			launchCommand: Legacy_unescapeHTML(data.CommandLine),
 			releaseDate: Legacy_unescapeHTML(data.ReleaseDate),
 			version: Legacy_unescapeHTML(data.Version),
-			originalDescription: Legacy_unescapeHTML(data.OriginalDescription),
+			description: Legacy_unescapeHTML(data.Description),
 			language: Legacy_unescapeHTML(data.Language),
 			library: library,
 			orderTitle: title.toLowerCase(),
@@ -63,7 +63,7 @@ export class Legacy_GameParser {
 			CommandLine: escapeHTML(game.launchCommand),
 			ReleaseDate: escapeHTML(game.releaseDate),
 			Version: escapeHTML(game.version),
-			OriginalDescription: escapeHTML(game.originalDescription),
+			Description: escapeHTML(game.description),
 			Language: escapeHTML(game.language),
 		};
 	}

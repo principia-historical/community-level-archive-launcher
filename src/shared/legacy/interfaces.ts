@@ -42,8 +42,8 @@ export interface Legacy_IPureGameInfo {
 	releaseDate: string;
 	/** Version of the game */
 	version: string;
-	/** Original description of the game */
-	originalDescription: string;
+	/** Description of the game */
+	description: string;
 	/** The language(s) the game is in */
 	language: string;
 }
@@ -105,6 +105,6 @@ export type Legacy_IRawGameInfo = {
 	CommandLine?: string;			// (String) - Launch Command
 	ReleaseDate?: string;			// (Nullable<DateTime>)
 	Version?: string;				// (String)
-	OriginalDescription?: string;	// (String)
+	Description?: string;	// (String)
 	Language?: string;				// (String)
 }

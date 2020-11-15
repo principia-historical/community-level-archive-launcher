@@ -99,7 +99,7 @@ function initProperties(): MetaEditFlags {
 		launchCommand: false,
 		releaseDate: false,
 		version: false,
-		originalDescription: false,
+		description: false,
 		language: false,
 		library: false,
 	};
@@ -109,25 +109,25 @@ function getGameString(key: keyof MetaEditFlags, strings: LangContainer): string
 	// @TODO Put all the strings for the different properties/field of a Game into the
 	//		 same place, instead of having them spread out?
 	switch (key) {
-		default:					return key;
-		case 'title':				return strings.filter.title;
-		case 'series':				return strings.browse.series;
-		case 'author':				return strings.filter.author;
-		case 'tags':				return strings.browse.tags;
-		case 'platform':			return strings.browse.platform;
-		case 'broken':				return strings.browse.brokenInInfinity;
-		case 'extreme':				return strings.browse.extreme;
-		case 'levelType':			return strings.browse.levelType;
-		case 'status':				return strings.browse.status;
-		case 'notes':				return strings.browse.notes;
-		case 'source':				return strings.browse.source;
-		case 'applicationPath':		return strings.browse.applicationPath;
-		case 'launchCommand':		return strings.browse.launchCommand;
-		case 'releaseDate':			return strings.browse.releaseDate;
-		case 'version':				return strings.browse.version;
-		case 'originalDescription':	return strings.browse.originalDescription;
-		case 'language':			return strings.browse.language;
-		case 'library':				return strings.browse.library;
+		default:				return key;
+		case 'title':			return strings.filter.title;
+		case 'series':			return strings.browse.series;
+		case 'author':			return strings.filter.author;
+		case 'tags':			return strings.browse.tags;
+		case 'platform':		return strings.browse.platform;
+		case 'broken':			return strings.browse.brokenInInfinity;
+		case 'extreme':			return strings.browse.extreme;
+		case 'levelType':		return strings.browse.levelType;
+		case 'status':			return strings.browse.status;
+		case 'notes':			return strings.browse.notes;
+		case 'source':			return strings.browse.source;
+		case 'applicationPath':	return strings.browse.applicationPath;
+		case 'launchCommand':	return strings.browse.launchCommand;
+		case 'releaseDate':		return strings.browse.releaseDate;
+		case 'version':			return strings.browse.version;
+		case 'description':		return strings.browse.description;
+		case 'language':		return strings.browse.language;
+		case 'library':			return strings.browse.library;
 	}
 }
 

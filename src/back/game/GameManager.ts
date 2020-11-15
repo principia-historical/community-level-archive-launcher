@@ -16,7 +16,7 @@ const exactFields = [ 'broken', 'extreme', 'library' ];
 enum flatGameFields {
 	'id', 'title', 'author', 'dateAdded', 'dateModified', 'series',
 	'platform', 'broken', 'extreme', 'levelType', 'status', 'notes', 'source', 'applicationPath', 'launchCommand', 'releaseDate',
-	'version', 'originalDescription', 'language', 'library'
+	'version', 'description', 'language', 'library'
 }
 
 export namespace GameManager {

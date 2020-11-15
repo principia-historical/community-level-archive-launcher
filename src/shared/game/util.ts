@@ -21,7 +21,7 @@ export namespace ModelUtils {
 			launchCommand: '',
 			releaseDate: '',
 			version: '',
-			originalDescription: '',
+			description: '',
 			language: '',
 			library: '',
 			orderTitle: '',

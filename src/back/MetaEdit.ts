@@ -36,24 +36,24 @@ function parseMetaEditMeta(parser: IObjectParserProp<any>) : MetaEditMeta {
 		id: '',
 	};
 
-	parser.prop('id',					v => parsed.id					= str(v));
-	parser.prop('title',				v => parsed.title				= str(v), true);
-	parser.prop('series',				v => parsed.series				= str(v), true);
-	parser.prop('author',				v => parsed.author			= str(v), true);
-	parser.prop('platform',				v => parsed.platform			= str(v), true);
-	parser.prop('broken',				v => parsed.broken				= strToBool(v + ''), true);
-	parser.prop('extreme',				v => parsed.extreme				= strToBool(v + ''), true);
-	parser.prop('levelType',				v => parsed.levelType			= str(v), true);
-	parser.prop('status',				v => parsed.status				= str(v), true);
-	parser.prop('notes',				v => parsed.notes				= str(v), true);
-	parser.prop('source',				v => parsed.source				= str(v), true);
-	parser.prop('applicationPath',		v => parsed.applicationPath		= str(v), true);
-	parser.prop('launchCommand',		v => parsed.launchCommand		= str(v), true);
-	parser.prop('releaseDate',			v => parsed.releaseDate			= str(v), true);
-	parser.prop('version',				v => parsed.version				= str(v), true);
-	parser.prop('originalDescription',	v => parsed.originalDescription	= str(v), true);
-	parser.prop('language',				v => parsed.language			= str(v), true);
-	parser.prop('library',				v => parsed.library				= str(v), true);
+	parser.prop('id',				v => parsed.id				= str(v));
+	parser.prop('title',			v => parsed.title			= str(v), true);
+	parser.prop('series',			v => parsed.series			= str(v), true);
+	parser.prop('author',			v => parsed.author			= str(v), true);
+	parser.prop('platform',			v => parsed.platform		= str(v), true);
+	parser.prop('broken',			v => parsed.broken			= strToBool(v + ''), true);
+	parser.prop('extreme',			v => parsed.extreme			= strToBool(v + ''), true);
+	parser.prop('levelType',		v => parsed.levelType		= str(v), true);
+	parser.prop('status',			v => parsed.status			= str(v), true);
+	parser.prop('notes',			v => parsed.notes			= str(v), true);
+	parser.prop('source',			v => parsed.source			= str(v), true);
+	parser.prop('applicationPath',	v => parsed.applicationPath	= str(v), true);
+	parser.prop('launchCommand',	v => parsed.launchCommand	= str(v), true);
+	parser.prop('releaseDate',		v => parsed.releaseDate		= str(v), true);
+	parser.prop('version',			v => parsed.version			= str(v), true);
+	parser.prop('description',		v => parsed.description		= str(v), true);
+	parser.prop('language',			v => parsed.language		= str(v), true);
+	parser.prop('library',			v => parsed.library			= str(v), true);
 
 	parser.prop('tags', v => parsed.tags = (v !== undefined) ? [] : undefined, true).arrayRaw(v => {
 		if (!parsed.tags) { throw new Error('"parsed.tags" is missing (bug)'); }
@@ -373,7 +373,7 @@ function paranoidSetGameProperty(game: Game, property: unknown, value: unknown):
 		case 'launchCommand':
 		case 'releaseDate':
 		case 'version':
-		case 'originalDescription':
+		case 'description':
 		case 'language':
 		case 'library':
 			if (typeof value !== 'string') { throw new Error(`${errorPrefix} Value is not a string (typeof value: "${typeof value}", property: "${property}").`); }

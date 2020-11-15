@@ -17,7 +17,7 @@ export type MetaEditMetaMap = Partial<{
 	launchCommand: string;
 	releaseDate: string;
 	version: string;
-	originalDescription: string;
+	description: string;
 	language: string;
 	library: string;
 }>

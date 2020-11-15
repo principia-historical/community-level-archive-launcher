@@ -58,6 +58,6 @@ const exampleMeta: ParsedCurationMeta = {
 		applicationPath: 'FPSoftware\\Basilisk-Portable\\Basilisk-Portable.exe',
 		launchCommand: 'http://example.com/index.html',
 		notes: 'Notes',
-		originalDescription: 'Original\nMultiline\nDesc'
+		description: 'Original\nMultiline\nDesc'
 	}
 };

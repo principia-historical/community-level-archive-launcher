@@ -40,7 +40,7 @@ export type EditCurationMeta = Partial<{
 	levelType: string;
 	releaseDate: string;
 	version: string;
-	originalDescription: string;
+	description: string;
 	language: string;
 }>
 

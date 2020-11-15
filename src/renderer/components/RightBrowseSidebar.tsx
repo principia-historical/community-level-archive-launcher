@@ -88,7 +88,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 	onLaunchCommandChange		= this.wrapOnTextChange((game, text) => this.props.onEditGame({ launchCommand: text }));
 	onApplicationPathChange		= this.wrapOnTextChange((game, text) => this.props.onEditGame({ applicationPath: text }));
 	onNotesChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ notes: text }));
-	onOriginalDescriptionChange	= this.wrapOnTextChange((game, text) => this.props.onEditGame({ originalDescription: text }));
+	onDescriptionChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ description: text }));
 	onBrokenChange				= this.wrapOnCheckBoxChange(game => {
 		if (this.props.currentGame) {
 			this.props.onEditGame({ broken: !this.props.currentGame.broken });
@@ -102,7 +102,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 	onSeriesClick				= this.wrapOnTextClick('series');
 	onSourceClick				= this.wrapOnTextClick('source');
 	onPlatformClick				= this.wrapOnTextClick('platform');
-	onLevelTypeClick				= this.wrapOnTextClick('levelType');
+	onLevelTypeClick			= this.wrapOnTextClick('levelType');
 	onStatusClick				= this.wrapOnTextClick('status');
 	onVersionClick				= this.wrapOnTextClick('version');
 	onReleaseDateClick			= this.wrapOnTextClick('releaseDate');
@@ -427,6 +427,20 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 							</div>
 						</div>
 					) : undefined }
+					{/* -- Description -- */}
+					{ (!editDisabled || game.description) && !isPlaceholder ? (
+						<div className='browse-right-sidebar__section'>
+							<div className='browse-right-sidebar__row'>
+								<p>{strings.description}: </p>
+								<InputField
+									text={game.description}
+									placeholder={strings.noDescription}
+									onChange={this.onDescriptionChange}
+									editable={editable}
+									multiline={true} />
+							</div>
+						</div>
+					) : undefined }
 					{/* -- Notes -- */}
 					{ (!editDisabled || game.notes) && !isPlaceholder ? (
 						<div className='browse-right-sidebar__section'>
@@ -436,20 +450,6 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 									text={game.notes}
 									placeholder={strings.noNotes}
 									onChange={this.onNotesChange}
-									editable={editable}
-									multiline={true} />
-							</div>
-						</div>
-					) : undefined }
-					{/* -- Original Description -- */}
-					{ (!editDisabled || game.originalDescription) && !isPlaceholder ? (
-						<div className='browse-right-sidebar__section'>
-							<div className='browse-right-sidebar__row'>
-								<p>{strings.originalDescription}: </p>
-								<InputField
-									text={game.originalDescription}
-									placeholder={strings.noOriginalDescription}
-									onChange={this.onOriginalDescriptionChange}
 									editable={editable}
 									multiline={true} />
 							</div>

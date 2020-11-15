@@ -91,8 +91,8 @@ export class Game {
 	version: string;
 
 	@Column({collation: 'NOCASE'})
-	/** Original description of the game */
-	originalDescription: string;
+	/** Description of the game */
+	description: string;
 
 	@Column({collation: 'NOCASE'})
 	/** The language(s) the game is in */
