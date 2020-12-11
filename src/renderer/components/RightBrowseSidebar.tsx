@@ -82,7 +82,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 	onPlatformChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ platform: text }));
 	onLevelTypeChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ levelType: text }));
 	onStatusChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ status: text }));
-	onVersionChange				= this.wrapOnTextChange((game, text) => this.props.onEditGame({ version: text }));
+	onRevisionChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ revision: text }));
 	onReleaseDateChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ releaseDate: text }));
 	onLanguageChange			= this.wrapOnTextChange((game, text) => this.props.onEditGame({ language: text }));
 	onLaunchCommandChange		= this.wrapOnTextChange((game, text) => this.props.onEditGame({ launchCommand: text }));
@@ -104,7 +104,7 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 	onPlatformClick				= this.wrapOnTextClick('platform');
 	onLevelTypeClick			= this.wrapOnTextClick('levelType');
 	onStatusClick				= this.wrapOnTextClick('status');
-	onVersionClick				= this.wrapOnTextClick('version');
+	onRevisionClick				= this.wrapOnTextClick('revision');
 	onReleaseDateClick			= this.wrapOnTextClick('releaseDate');
 	onLanguageClick				= this.wrapOnTextClick('language');
 
@@ -330,14 +330,14 @@ export class RightBrowseSidebar extends React.Component<RightBrowseSidebarProps,
 										onKeyDown={this.onInputKeyDown} />
 								</div>
 								<div className='browse-right-sidebar__row browse-right-sidebar__row--one-line'>
-									<p>{strings.version}: </p>
+									<p>{strings.revision}: </p>
 									<InputField
-										text={game.version}
-										placeholder={strings.noVersion}
+										text={game.revision}
+										placeholder={strings.noRevision}
 										className='browse-right-sidebar__searchable'
-										onChange={this.onVersionChange}
+										onChange={this.onRevisionChange}
 										editable={editable}
-										onClick={this.onVersionClick}
+										onClick={this.onRevisionClick}
 										onKeyDown={this.onInputKeyDown} />
 								</div>
 								<div className='browse-right-sidebar__row browse-right-sidebar__row--one-line'>

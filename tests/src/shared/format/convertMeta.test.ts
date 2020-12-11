@@ -48,7 +48,7 @@ const exampleMeta: ParsedCurationMeta = {
 		author: 'Author',
 		levelType: 'Custom',
 		releaseDate: '2019-01-01',
-		version: '1.0.0',
+		revision: '1.0.0',
 		language: 'en',
 		extreme: 'Yes',
 		tags: 'List; Of; Tags',

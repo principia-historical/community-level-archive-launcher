@@ -98,7 +98,7 @@ function initProperties(): MetaEditFlags {
 		applicationPath: false,
 		launchCommand: false,
 		releaseDate: false,
-		version: false,
+		revision: false,
 		description: false,
 		language: false,
 		library: false,
@@ -124,7 +124,7 @@ function getGameString(key: keyof MetaEditFlags, strings: LangContainer): string
 		case 'applicationPath':	return strings.browse.applicationPath;
 		case 'launchCommand':	return strings.browse.launchCommand;
 		case 'releaseDate':		return strings.browse.releaseDate;
-		case 'version':			return strings.browse.version;
+		case 'revision':		return strings.browse.revision;
 		case 'description':		return strings.browse.description;
 		case 'language':		return strings.browse.language;
 		case 'library':			return strings.browse.library;

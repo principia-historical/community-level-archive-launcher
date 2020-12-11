@@ -20,7 +20,7 @@ export namespace ModelUtils {
 			applicationPath: '',
 			launchCommand: '',
 			releaseDate: '',
-			version: '',
+			revision: '',
 			description: '',
 			language: '',
 			library: '',

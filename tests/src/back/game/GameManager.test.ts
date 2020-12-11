@@ -279,6 +279,6 @@ function createGame(platform: string, library: string): IGameInfo {
 		language: '',
 		launchCommand: '',
 		releaseDate: '',
-		version: '',
+		revision: '',
 	};
 }

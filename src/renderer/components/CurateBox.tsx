@@ -187,7 +187,7 @@ export function CurateBox(props: CurateBoxProps) {
 	const onAuthorChange				= useOnInputChange('author',			key, props.dispatch);
 	const onLevelTypeChange				= useOnInputChange('levelType',			key, props.dispatch);
 	const onStatusChange				= useOnInputChange('status',			key, props.dispatch);
-	const onVersionChange				= useOnInputChange('version',			key, props.dispatch);
+	const onRevisionChange				= useOnInputChange('revision',			key, props.dispatch);
 	const onReleaseDateChange			= useOnInputChange('releaseDate',		key, props.dispatch);
 	const onLanguageChange				= useOnInputChange('language',			key, props.dispatch);
 	const onSourceChange				= useOnInputChange('source',			key, props.dispatch);
@@ -673,11 +673,11 @@ export function CurateBox(props: CurateBoxProps) {
 							onItemSelect={onStatusSelect}
 							{ ...sharedInputProps } />
 					</CurateBoxRow>
-					<CurateBoxRow title={strings.browse.version + ':'}>
+					<CurateBoxRow title={strings.browse.revision + ':'}>
 						<InputField
-							text={props.curation && props.curation.meta.version || ''}
-							placeholder={strings.browse.noVersion}
-							onChange={onVersionChange}
+							text={props.curation && props.curation.meta.revision || ''}
+							placeholder={strings.browse.noRevision}
+							onChange={onRevisionChange}
 							{ ...sharedInputProps } />
 					</CurateBoxRow>
 					<CurateBoxRow title={strings.browse.releaseDate + ':'}>

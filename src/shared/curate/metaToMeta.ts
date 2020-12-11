@@ -19,7 +19,7 @@ export function convertGameToCurationMetaFile(game: Game, categories: TagCategor
 	parsed['Author']			= game.author;
 	parsed['Level Type']		= game.levelType;
 	parsed['Release Date']		= game.releaseDate;
-	parsed['Version']			= game.version;
+	parsed['Revision']			= game.revision;
 	parsed['Languages']			= game.language;
 	parsed['Extreme']			= game.extreme ? 'Yes' : 'No';
 	parsed['Tags']				= game.tags.map(t => t.primaryAlias.name).join('; ');
@@ -53,7 +53,7 @@ export function convertEditToCurationMetaFile(curation: EditCurationMeta, catego
 	parsed['Author']			= curation.author;
 	parsed['Level Type']		= curation.levelType;
 	parsed['Release Date']		= curation.releaseDate;
-	parsed['Version']			= curation.version;
+	parsed['Revision']			= curation.revision;
 	parsed['Languages']			= curation.language;
 	parsed['Extreme']			= curation.extreme ? 'Yes' : 'No';
 	parsed['Tags']				= curation.tags ? curation.tags.map(t => t.primaryAlias.name).join('; ') : '';
@@ -87,7 +87,7 @@ export function convertParsedToCurationMeta(curation: ParsedCurationMeta, catego
 	parsed['Author']			= curation.game.author;
 	parsed['Level Type']		= curation.game.levelType;
 	parsed['Release Date']		= curation.game.releaseDate;
-	parsed['Version']			= curation.game.version;
+	parsed['Revision']			= curation.game.revision;
 	parsed['Languages']			= curation.game.language;
 	parsed['Extreme']			= curation.game.extreme ? 'Yes' : 'No';
 	parsed['Tags']				= curation.game.tags ? curation.game.tags.map(t => t.primaryAlias.name).join('; ') : '';
@@ -122,6 +122,6 @@ type CurationMetaFile = {
 	'Tag Categories'?: string;
 	'Title'?: string;
 	'Library'?: string;
-	'Version'?: string;
+	'Revision'?: string;
 	'Curation Notes'?: string;
 };

@@ -87,8 +87,8 @@ export class Game {
 	releaseDate: string;
 
 	@Column({collation: 'NOCASE'})
-	/** Version of the game */
-	version: string;
+	/** Revision of the game */
+	revision: string;
 
 	@Column({collation: 'NOCASE'})
 	/** Description of the game */

@@ -74,7 +74,7 @@ async function parseGame(data: any, onError?: (error: string) => void): Promise<
 	parser.prop('launch_command',	v => parsed.launchCommand	= str(v));
 	parser.prop('date_added',		v => parsed.dateAdded		= (new Date(num(v))).toISOString());
 	parser.prop('date_modified',	v => parsed.dateModified	= (new Date(num(v))).toISOString());
-	parser.prop('version',			v => parsed.version			= str(v));
+	parser.prop('revision',			v => parsed.revision		= str(v));
 	parser.prop('languages',		v => parsed.language		= str(v));
 	parser.prop('parent_id',		v => parsed.parentGameId	= str(v));
 
