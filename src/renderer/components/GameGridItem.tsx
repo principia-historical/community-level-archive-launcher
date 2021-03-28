@@ -46,13 +46,6 @@ export function GameGridItem(props: GameGridItemProps) {
 					<div
 						className='game-grid-item__thumb__image'
 						style={{ backgroundImage: `url('${thumbnail}')` }}>
-						<div className='game-grid-item__thumb__icons'>
-							{(platformIcon) ? (
-								<div
-									className='game-grid-item__thumb__icons__icon'
-									style={{ backgroundImage: `url('${platformIcon}')` }} />
-							) : undefined }
-						</div>
 					</div>
 				</div>
 				<div className='game-grid-item__title' title={title}>

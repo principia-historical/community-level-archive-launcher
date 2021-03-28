@@ -53,8 +53,6 @@
 		"hallOfFame": "Hall of Fame",
 		"allGamesInfo": "Looking for something to play? View {0}.",
 		"allGames": "All Games",
-		"allAnimationsInfo": "Just want something to watch? View {0}.",
-		"allAnimations": "All Animations",
 		"configInfo": "Want to change something? Go to {0}.",
 		"config": "Config",
 		"helpInfo": "Need help? {0}.",
@@ -171,8 +169,8 @@
 	},
 	"about": {
 		"aboutHeader": "About",
-		"flashpoint": "BlueMaxima's Flashpoint",
-		"flashpointDesc": "The preservation project this launcher was built for, that aims to be an archive, museum and playable collection of web-based Internet games.",
+		"flashpoint": "Principia Community Archive",
+		"flashpointDesc": "The Principia Community Archive is a project to archive and preserve levels that used to be on the official Principia community site.",
 		"website": "Website",
 		"flashpointLauncher": "Flashpoint Launcher",
 		"flashpointLauncherDesc": "An open-source desktop application used to browse, manage and play games from the Flashpoint project.",
@@ -414,11 +412,7 @@
 	},
 	"libraries": {
 		"arcade": "Games",
-		"arcadePlural": "All Games",
-		"theatre": "Animations",
-		"theatrePlural": "All Animations",
-		"auditorium": "NG Auditorium",
-		"auditoriumPlural": "All NG Animations"
+		"arcadePlural": "All Games"
 	},
 	"upgrades": {
 		"infinity": "Flashpoint Infinity",

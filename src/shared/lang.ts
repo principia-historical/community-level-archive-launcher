@@ -60,8 +60,6 @@ const langTemplate = {
 		'hallOfFame',
 		'allGamesInfo',
 		'allGames',
-		'allAnimationsInfo',
-		'allAnimations',
 		'configInfo',
 		'config',
 		'helpInfo',
@@ -511,7 +509,6 @@ export function getDefaultLocalization(): LangContainer {
 	lang.config.auto += ' ({0})';
 	lang.home.hallOfFameInfo += ' {0}';
 	lang.home.allGamesInfo += ' {0}';
-	lang.home.allAnimationsInfo += ' {0}';
 	lang.home.configInfo += ' {0}';
 	lang.home.helpInfo += ' {0}';
 	lang.home.linuxSupport += ' {0}';

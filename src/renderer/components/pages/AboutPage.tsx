@@ -64,10 +64,10 @@ export class AboutPage extends React.Component<AboutPageProps, AboutPageState> {
 										<p className='about-page__section__content__description'>
 											{strings.flashpointDesc}
 										</p>
-										<div className='about-page__section__links'>
+										{/*<div className='about-page__section__links'>
 											{link(strings.website, 'http://bluemaxima.org/flashpoint/')}
 											{link('Discord', 'https://discord.gg/Nc3DScn')}
-										</div>
+										</div>*/}
 									</div>
 								</div>
 								{/* About Flashpoint Launcher */}

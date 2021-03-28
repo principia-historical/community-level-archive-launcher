@@ -54,7 +54,7 @@ describe('Util Renderer Various', () => {
 	});
 
 	test('Get Game Image URL', () => {
-		expect(getGameImageURL('test', 'abcd')).toBe('http://mockserver/images/test/ab/cd/abcd.png');
+		expect(getGameImageURL('test', 'abcd')).toBe('http://mockserver/images/test/abcd.jpg');
 	});
 
 	test('Get Platform Image URL', () => {

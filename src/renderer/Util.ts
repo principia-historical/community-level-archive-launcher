@@ -98,7 +98,7 @@ export function checkIfAncestor(start: Element | null, target: Element | null): 
 }
 
 export function getGameImageURL(folderName: string, gameId: string): string {
-	return `${getFileServerURL()}/images/${folderName}/${gameId.substr(0, 2)}/${gameId.substr(2, 2)}/${gameId}.png`;
+	return `${getFileServerURL()}/images/${folderName}/${gameId}.jpg`;
 }
 
 export function getPlatformIconURL(platform: string): string {

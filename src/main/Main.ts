@@ -69,7 +69,7 @@ export function main(init: Init): void {
 			app.exit();
 			return;
 		}
-
+//
 		// Add app event listener(s)
 		app.once('ready', onAppReady);
 		app.once('window-all-closed', onAppWindowAllClosed);

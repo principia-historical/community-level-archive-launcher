@@ -43,7 +43,7 @@ const exampleMetaPath = './tests/static/curate/format/meta_example.yaml';
 const exampleMeta: ParsedCurationMeta = {
 	game: {
 		title: 'Test Curation',
-		library: 'theatre',
+		library: 'arcade',
 		series: 'Series',
 		author: 'Author',
 		levelType: 'Custom',

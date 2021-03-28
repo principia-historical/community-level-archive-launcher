@@ -1,9 +1,8 @@
 /** Title of the main window. */
-export const APP_TITLE = 'Flashpoint Launcher';
+export const APP_TITLE = 'Principia Community Level Archive';
 
 // Flashpoint libraries
 export const ARCADE = 'arcade';
-export const THEATRE = 'theatre';
 
 // Names of the image sub-folders
 export const LOGOS = 'Logos';

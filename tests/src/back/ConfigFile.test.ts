@@ -68,8 +68,6 @@ const staticConfig: IAppConfigData = {
 	themeFolderPath: 'TestSuccess',
 	useCustomTitlebar: true,
 	startServer: false,
-	startRedirector: false,
-	useFiddler: true,
 	disableExtremeGames: true,
 	showBrokenGames: true,
 	backPortMin: 1,

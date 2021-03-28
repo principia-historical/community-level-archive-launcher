@@ -1,5 +1,5 @@
 import { Playlist } from '@database/entity/Playlist';
-import { ARCADE, THEATRE } from '@shared/constants';
+import { ARCADE } from '@shared/constants';
 import { wrapSearchTerm } from '@shared/game/GameFilter';
 import { LangContainer } from '@shared/lang';
 import { getUpgradeString } from '@shared/upgrade/util';
@@ -89,11 +89,6 @@ export function HomePage(props: HomePageProps) {
 
 	const onAllGamesClick = React.useCallback(() => {
 		props.onSelectPlaylist(ARCADE, undefined);
-		props.clearSearch();
-	}, [props.onSelectPlaylist, props.clearSearch]);
-
-	const onAllAnimationsClick = React.useCallback(() => {
-		props.onSelectPlaylist(THEATRE, undefined);
 		props.clearSearch();
 	}, [props.onSelectPlaylist, props.clearSearch]);
 
@@ -206,9 +201,6 @@ export function HomePage(props: HomePageProps) {
 				<QuickStartItem icon='play-circle'>
 					{formatString(strings.allGamesInfo, <Link to={joinLibraryRoute(ARCADE)} onClick={onAllGamesClick}>{strings.allGames}</Link>)}
 				</QuickStartItem>
-				<QuickStartItem icon='video'>
-					{formatString(strings.allAnimationsInfo, <Link to={joinLibraryRoute(THEATRE)} onClick={onAllAnimationsClick}>{strings.allAnimations}</Link>)}
-				</QuickStartItem>
 				<QuickStartItem icon='wrench'>
 					{formatString(strings.configInfo, <Link to={Paths.CONFIG}>{strings.config}</Link>)}
 				</QuickStartItem>
@@ -217,7 +209,7 @@ export function HomePage(props: HomePageProps) {
 				</QuickStartItem>
 			</ul>
 		</div>
-	), [strings, onHallOfFameClick, onAllGamesClick, onAllAnimationsClick, onHelpClick]);
+	), [strings, onHallOfFameClick, onAllGamesClick, onHelpClick]);
 
 	const renderedExtras = React.useMemo(() => (
 		<div className='home-page__box home-page__box--extras'>
